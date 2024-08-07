@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_01_114743) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_07_160455) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,4 +22,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_01_114743) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "lists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "deck_id", null: false
+    t.json "cards"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deck_id"], name: "index_lists_on_deck_id"
+  end
+
+  add_foreign_key "lists", "decks"
 end

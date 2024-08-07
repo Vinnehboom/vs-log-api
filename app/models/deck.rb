@@ -4,4 +4,6 @@ class Deck < ApplicationRecord
   validates :name, presence: true
   validates :archetype, presence: true
 
+  has_many :lists, dependent: :destroy
+
 end
