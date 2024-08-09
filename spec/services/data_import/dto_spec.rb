@@ -6,12 +6,31 @@ module DataImport
     let(:example_class) { Deck }
     let(:example_dto_class) { DeckDto }
     let(:example_instance) { build(:deck) }
-    let(:example_dto_instance) { example_dto_class.new(object: example_instance.attributes) }
+    let(:game) { create(:game) }
+    let(:example_dto_instance) { example_dto_class.new(object: example_instance.attributes, game:) }
 
     describe '#update_instance' do
       describe 'when the record does not exist yet' do
         it 'creates the record with the given data' do
           expect { example_dto_instance.update_instance }.to change(example_class, :count).by(1)
+        end
+
+        describe 'when the record belongs to a game' do
+          it 'adds the relationship to the passed game' do
+            example_dto_instance.update_instance
+            expect(Deck.last.game_id).to eq(game.id)
+          end
+        end
+
+        describe 'when the record does not belong to a game' do
+          let(:example_class) { List }
+          let(:example_dto_class) { ListDto }
+          let(:example_instance) { build(:list) }
+
+          it 'does not add the relationship to the passed game' do
+            example_dto_instance.update_instance
+            expect(List.last).not_to respond_to(:game)
+          end
         end
       end
 

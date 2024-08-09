@@ -5,5 +5,6 @@ class Deck < ApplicationRecord
   validates :archetype, presence: true
 
   has_many :lists, dependent: :destroy
+  belongs_to :game
 
 end
