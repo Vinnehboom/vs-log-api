@@ -2,17 +2,18 @@ module DataImport
 
   class Importer
 
-    attr_accessor :dto_class, :parser
+    attr_accessor :dto_class, :parser, :game
 
-    def initialize(dto_class:, parser:)
+    def initialize(dto_class:, parser:, game:)
       @dto_class = dto_class
       @parser = parser
+      @game = game
     end
 
     def import(data:)
       objects = parse_data(data:)
       objects.each do |object|
-        dto = dto_class.new(object:)
+        dto = dto_class.new(object:, game:)
         dto.update_instance
       end
     end

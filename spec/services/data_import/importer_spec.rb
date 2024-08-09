@@ -5,8 +5,9 @@ module DataImport
   RSpec.describe Importer do
     let(:parser_double) { instance_double(Parser) }
     let(:dto_class_double) { class_double(DeckDto) }
+    let(:game) { create(:game) }
     let(:dto_double) { instance_double(DeckDto) }
-    let(:importer) { described_class.new(parser: parser_double, dto_class: dto_class_double) }
+    let(:importer) { described_class.new(parser: parser_double, dto_class: dto_class_double, game:) }
 
     before do
       allow(dto_class_double).to receive(:new).and_return(dto_double)

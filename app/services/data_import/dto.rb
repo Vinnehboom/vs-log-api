@@ -2,10 +2,11 @@ module DataImport
 
   class Dto
 
-    attr_accessor :object
+    attr_accessor :object, :game
 
-    def initialize(object:)
+    def initialize(object:, game:)
       @object = object
+      @game = game
     end
 
     def update_instance
@@ -15,6 +16,10 @@ module DataImport
     private
 
     def attributes
+      model.has_attribute?(:game_id) ? model_attributes.merge(game_id: game.id) : model_attributes
+    end
+
+    def model_attributes
       raise '#attributes not implemented'
     end
 
