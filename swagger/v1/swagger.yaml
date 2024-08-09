@@ -4,11 +4,17 @@ info:
   title: API V1
   version: v1
 paths:
-  "/decks":
+  "/{game_id}/decks":
     get:
       summary: Retrieve all blogs
       tags:
       - Decks
+      parameters:
+      - name: game_id
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Deck found
@@ -23,13 +29,18 @@ paths:
                     archetype:
                       identifier: gardevoir-ex
                     name: Psychic Elegance
-  "/decks/{id}":
+  "/{game_id}/decks/{id}":
     get:
       summary: Retrieve a blog
       tags:
       - Decks
       parameters:
       - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: game_id
         in: path
         required: true
         schema:
