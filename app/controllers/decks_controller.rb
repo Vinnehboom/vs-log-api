@@ -1,12 +1,12 @@
 class DecksController < ApplicationController
 
   def index
-    @decks = Deck.all
+    @decks = Deck.where(game:)
     render json: @decks
   end
 
   def show
-    @deck = Deck.find(params[:id])
+    @deck = Deck.where(game:).find(params[:id])
     render json: @deck
   end
 
