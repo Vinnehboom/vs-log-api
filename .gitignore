@@ -33,4 +33,6 @@
 /config/master.key
 /config/credentials/*.key
 
+dump.rdb
+
 .byebug_history

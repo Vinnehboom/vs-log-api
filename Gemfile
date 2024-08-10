@@ -14,8 +14,10 @@ gem 'pg'
 # gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
+gem 'firebase_id_token', '~> 3.0.0'
 gem 'redis', '>= 4.0.1'
 gem 'rswag'
+gem 'whenever', require: false
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
