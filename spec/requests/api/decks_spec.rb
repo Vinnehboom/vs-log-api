@@ -7,14 +7,13 @@ RSpec.describe 'api/decks' do
 
   describe 'Decks API' do
     let(:game) { create(:game) }
-    let(:user_id) { '1234-vinnie' }
-    let(:HTTP_FIREBASE_ID_TOKEN) { create_firebase_userid_token(user: user_id) }
+    let(:HTTP_FIREBASE_ID_TOKEN) { create_firebase_userid_token(user: firebase_user_id) }
 
     path '/{game_id}/decks' do
-      let(:decks) { create_list(:deck, 3, game:) }
+      let(:decks) { create_list(:deck, 3, game:, user_id: firebase_user_id) }
       let(:game_id) { game.id }
 
-      get 'Retrieve all decks' do
+      get "Retrieve all the user's decks" do
         tags 'Decks'
         consumes 'application/json'
         parameter name: :game_id, in: :path, type: :string
@@ -40,7 +39,7 @@ RSpec.describe 'api/decks' do
     end
 
     path '/{game_id}/decks/{id}' do
-      let(:deck) { create(:deck, game:) }
+      let(:deck) { create(:deck, game:, user_id: firebase_user_id) }
       let(:id) { deck.id }
       let(:game_id) { game.id }
 

@@ -5,6 +5,10 @@ module Helpers
                OpenSSL::PKey::RSA.new(FirebaseIdToken::Testing::Certificates.private_key), 'RS256'
   end
 
+  def firebase_user_id
+    'doremi-abc-123'
+  end
+
   private
 
   def payload # rubocop:disable Metrics/MethodLength
@@ -14,7 +18,7 @@ module Helpers
       picture: 'https://someurl.com/photo.jpg',
       aud: Rails.application.credentials.firebase.id.to_s,
       auth_time: 1_492_981_192,
-      user_id: 'theUserID',
+      user_id: firebase_user_id,
       sub: 'theUserID',
       iat: 1_492_981_200,
       exp: 33_029_000_017,
