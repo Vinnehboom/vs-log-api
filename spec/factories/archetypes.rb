@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :archetype do
-    identifier { Faker::Games::Pokemon.name }
+    sequence(:identifier) { |n| "#{Faker::Games::Pokemon.name}-#{n}" }
     name { Faker::Games::Pokemon.name }
     priority { rand(25) }
     generation { rand(10) }
