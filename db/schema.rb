@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_13_145339) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_13_172441) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -81,10 +81,31 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_13_145339) do
     t.index ["deck_id"], name: "index_lists_on_deck_id"
   end
 
+  create_table "match_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "list_id", null: false
+    t.uuid "deck_id", null: false
+    t.bigint "opponent_archetype_id", null: false
+    t.bigint "archetype_id", null: false
+    t.boolean "bo3"
+    t.boolean "coinflip_won"
+    t.string "remarks"
+    t.string "result"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["archetype_id"], name: "index_match_records_on_archetype_id"
+    t.index ["deck_id"], name: "index_match_records_on_deck_id"
+    t.index ["list_id"], name: "index_match_records_on_list_id"
+    t.index ["opponent_archetype_id"], name: "index_match_records_on_opponent_archetype_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "archetypes", "games"
   add_foreign_key "decks", "archetypes"
   add_foreign_key "decks", "games"
   add_foreign_key "lists", "decks"
+  add_foreign_key "match_records", "archetypes"
+  add_foreign_key "match_records", "archetypes", column: "opponent_archetype_id"
+  add_foreign_key "match_records", "decks"
+  add_foreign_key "match_records", "lists"
 end

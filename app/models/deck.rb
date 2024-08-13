@@ -4,6 +4,7 @@ class Deck < ApplicationRecord
   validates :name, presence: true
 
   has_many :lists, dependent: :destroy
+  has_many :match_records, dependent: :nullify
   belongs_to :game
   belongs_to :archetype
 
