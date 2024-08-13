@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_12_124258) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_13_145339) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,13 +42,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_12_124258) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "archetypes", force: :cascade do |t|
+    t.string "identifier"
+    t.string "name"
+    t.integer "priority"
+    t.integer "generation"
+    t.json "cards"
+    t.string "game_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_archetypes_on_game_id"
+    t.index ["identifier"], name: "index_archetypes_on_identifier", unique: true
+  end
+
   create_table "decks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "user_id"
-    t.json "archetype"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "game_id", null: false
+    t.bigint "archetype_id", null: false
+    t.index ["archetype_id"], name: "index_decks_on_archetype_id"
     t.index ["game_id"], name: "index_decks_on_game_id"
   end
 
@@ -69,6 +83,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_12_124258) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "archetypes", "games"
+  add_foreign_key "decks", "archetypes"
   add_foreign_key "decks", "games"
   add_foreign_key "lists", "decks"
 end

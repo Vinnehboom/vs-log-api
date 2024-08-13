@@ -1,5 +1,13 @@
 namespace :data_import do
   desc 'import Decks from a given file'
+
+  task :archetypes, %i[file game_id] => [:environment] do |_task, args|
+    game = find_game(args[:game_id])
+    importer = DataImport::Importer.new(dto_class: DataImport::ArchetypeDto, parser: DataImport::ArchetypeParser.new,
+                                        game:)
+    importer.import(data: read_file(args[:file]))
+  end
+
   task :decks, %i[file game_id] => [:environment] do |_task, args|
     game = find_game(args[:game_id])
     importer = DataImport::Importer.new(dto_class: DataImport::DeckDto, parser: DataImport::Parser.new, game:)

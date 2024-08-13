@@ -5,9 +5,15 @@ module DataImport
   RSpec.describe Dto do
     let(:example_class) { Deck }
     let(:example_dto_class) { DeckDto }
-    let(:example_instance) { build(:deck) }
     let(:game) { create(:game) }
-    let(:example_dto_instance) { example_dto_class.new(object: example_instance.attributes, game:) }
+    let(:archetype) { create(:archetype, game:) }
+    let(:example_instance) { build(:deck, archetype:, game:) }
+    let(:object) do
+      object = example_instance.attributes
+      object['archetype'] = archetype.attributes
+      object
+    end
+    let(:example_dto_instance) { example_dto_class.new(object:, game:) }
 
     describe '#update_instance' do
       describe 'when the record does not exist yet' do
@@ -26,6 +32,7 @@ module DataImport
           let(:example_class) { List }
           let(:example_dto_class) { ListDto }
           let(:example_instance) { build(:list) }
+          let(:object) { example_instance.attributes }
 
           it 'does not add the relationship to the passed game' do
             example_dto_instance.update_instance

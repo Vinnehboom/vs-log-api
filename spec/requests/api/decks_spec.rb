@@ -29,7 +29,7 @@ RSpec.describe 'api/decks' do
             game_id: 'PTCG',
             id: '1234-abcd',
             user_id: ' 123d-adsd',
-            archetype: { identifier: 'gardevoir-ex' },
+            archetype_id: 9,
             name: 'Psychic Elegance'
           }]
 
@@ -57,16 +57,16 @@ RSpec.describe 'api/decks' do
                    id: { type: :string },
                    user_id: { type: :string },
                    name: { type: :string },
-                   archetype: { type: :json }
+                   archetype_id: { type: :integer }
                  },
-                 required: %w[id name archetype user_id]
+                 required: %w[id name archetype_id user_id]
 
           example 'application/json', :example_key, {
             game_id: 'PTCG',
             id: '1234-abcd',
             user_id: ' 123d-adsd',
-            archetype: { identifier: 'gardevoir-ex' },
-            name: 'Psychic Elegance'
+            archetype_id: 9,
+          name: 'Psychic Elegance'
           }
 
           run_test!

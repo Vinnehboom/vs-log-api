@@ -6,7 +6,7 @@ info:
 paths:
   "/{game_id}/decks":
     get:
-      summary: Retrieve all blogs
+      summary: Retrieve all the user's decks
       tags:
       - Decks
       parameters:
@@ -15,7 +15,13 @@ paths:
         required: true
         schema:
           type: string
+      - name: HTTP_FIREBASE_ID_TOKEN
+        in: header
+        schema:
+          type: string
       responses:
+        '401':
+          description: unauthorized
         '200':
           description: Deck found
           content:
@@ -31,7 +37,7 @@ paths:
                     name: Psychic Elegance
   "/{game_id}/decks/{id}":
     get:
-      summary: Retrieve a blog
+      summary: Retrieve a deck
       tags:
       - Decks
       parameters:
@@ -43,6 +49,10 @@ paths:
       - name: game_id
         in: path
         required: true
+        schema:
+          type: string
+      - name: HTTP_FIREBASE_ID_TOKEN
+        in: header
         schema:
           type: string
       responses:
@@ -59,6 +69,8 @@ paths:
                     archetype:
                       identifier: gardevoir-ex
                     name: Psychic Elegance
+        '401':
+          description: unauthorized
         '404':
           description: Deck not found
 servers:
