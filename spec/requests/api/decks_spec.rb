@@ -66,7 +66,7 @@ RSpec.describe 'api/decks' do
             id: '1234-abcd',
             user_id: ' 123d-adsd',
             archetype_id: 9,
-          name: 'Psychic Elegance'
+            name: 'Psychic Elegance'
           }
 
           run_test!
