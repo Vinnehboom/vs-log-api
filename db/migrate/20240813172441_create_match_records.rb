@@ -1,8 +1,8 @@
 class CreateMatchRecords < ActiveRecord::Migration[7.1]
   def change
     create_table :match_records, id: :uuid do |t|
-      t.references :list, null: false, foreign_key: true, type: :uuid
-      t.references :deck, null: false, foreign_key: true, type: :uuid
+      t.references :list, null: true, foreign_key: true, type: :uuid
+      t.references :deck, null: true, foreign_key: true, type: :uuid
       t.references :opponent_archetype, null: false
       t.references :archetype, null: false
       t.boolean :bo3

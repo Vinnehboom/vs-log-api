@@ -20,6 +20,12 @@ namespace :data_import do
     importer.import(data: read_file(args[:file]))
   end
 
+  task :match_records, %i[file game_id] => [:environment] do |_task, args|
+    game = find_game(args[:game_id])
+    importer = DataImport::Importer.new(dto_class: DataImport::MatchRecordDto, parser: DataImport::Parser.new, game:)
+    importer.import(data: read_file(args[:file]))
+  end
+
   def read_file(file_path)
     JSON.parse(File.read(file_path))
   end

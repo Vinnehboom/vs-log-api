@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   namespace :admin do
-      resources :archetypes, only: %i[index show new create edit update destroy]
-      resources :decks, only: %i[index show new create edit update]
-      resources :games, only: %i[index show new create edit update]
-      resources :lists, only: %i[index show new create edit update]
+    resources :archetypes, only: %i[index show new create edit update destroy]
+    resources :decks, only: %i[index show new create edit update]
+    resources :games, only: %i[index show new create edit update]
+    resources :lists, only: %i[index show new create edit update]
+    resources :match_records, only: %i[index show new create edit update]
 
-      root to: "archetypes#index"
-    end
+    root to: "games#index"
+  end
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
