@@ -13,6 +13,7 @@ class DeckDashboard < Administrate::BaseDashboard
     archetype: Field::BelongsTo,
     game: Field::BelongsTo,
     lists: Field::HasMany,
+    matches: Field::HasMany,
     name: Field::String,
     user_id: Field::String,
     created_at: Field::DateTime,
@@ -39,6 +40,7 @@ class DeckDashboard < Administrate::BaseDashboard
     archetype
     game
     lists
+    matches
     name
     user_id
     created_at

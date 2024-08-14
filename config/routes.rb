@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :decks, only: %i[index show new create edit update]
     resources :games, only: %i[index show new create edit update]
     resources :lists, only: %i[index show new create edit update]
-    resources :match_records, only: %i[index show new create edit update]
+    resources :matches, only: %i[index show new create edit update]
 
     root to: "games#index"
   end

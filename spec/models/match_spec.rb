@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe MatchRecord do
+RSpec.describe Match do
   it { is_expected.to belong_to(:deck).optional }
   it { is_expected.to belong_to(:archetype) }
   it { is_expected.to belong_to(:opponent_archetype) }
