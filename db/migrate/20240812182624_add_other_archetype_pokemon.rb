@@ -11,7 +11,7 @@ class AddOtherArchetypePokemon < ActiveRecord::Migration[7.1]
   end
 
   def up
-    game = Game.find("PTCG")
+    game = Game.find_or_create_by(id: "PTCG", name: "Pokémon TCG")
     other = Archetype.find_or_initialize_by(
       name: "Other",
       identifier: "other",

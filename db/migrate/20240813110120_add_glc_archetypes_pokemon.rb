@@ -15,7 +15,7 @@ class AddGlcArchetypesPokemon < ActiveRecord::Migration[7.1]
 
   def up
 
-    game = Game.find("PTCG")
+    game = Game.find_or_create_by(id: "PTCG", name: "Pokémon TCG")
     glc_types = %w[colorless lightning fighting water grass fire metal psychic dragon fairy dark]
 
     glc_archetypes = glc_types.map do |type|
