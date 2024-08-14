@@ -2,22 +2,33 @@ module DataImport
 
   class DeckDto < Dto
 
+    def id
+      object['id']
+    end
+
     private
 
     def model_attributes
-      archetype = find_archetype
-      attributes = object.transform_keys { |key| key.to_s.underscore }
-      attributes['archetype_id'] = archetype.id
-      attributes.delete('__collections__')
-      attributes.delete('archetype')
-      attributes
+      {
+        name:,
+        user_id:,
+        archetype_id: archetype.id
+      }
     end
 
     def model
       Deck
     end
 
-    def find_archetype
+    def name
+      object['name']
+    end
+
+    def user_id
+      object['userId']
+    end
+
+    def archetype
       Archetype.find_by(identifier: object['archetype']['identifier'] || object['archetype'])
     end
 

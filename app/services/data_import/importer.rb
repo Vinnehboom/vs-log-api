@@ -12,13 +12,24 @@ module DataImport
 
     def import(data:)
       objects = parse_data(data:)
-      objects.each do |object|
-        dto = dto_class.new(object:, game:)
-        dto.update_instance
-      end
+      count = objects.count
+      @processed = 0
+      @errors = []
+      process_objects(objects:)
+      Rails.logger.debug { "invalid objects: #{@errors} \n" }
+      Rails.logger.debug { "#{@processed} out of #{count} processed" }
     end
 
     private
+
+    def process_objects(objects:)
+      objects.each do |object|
+        dto = dto_class.new(object:, game:)
+        @processed += 1 if dto.update_instance
+      rescue ActiveRecord::RecordInvalid => e
+        @errors << [dto.object, e.message]
+      end
+    end
 
     def parse_data(data:)
       parser.parse(data:)

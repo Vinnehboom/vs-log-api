@@ -2,6 +2,8 @@ module DataImport
 
   class ArchetypeDto < Dto
 
+    def id; end
+
     private
 
     def model_attributes

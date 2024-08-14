@@ -10,7 +10,7 @@ module DataImport
     end
 
     def update_instance
-      model.find_or_initialize_by(id: attributes['id']).update(attributes)
+      model.find_or_initialize_by(id:).update!(attributes)
     end
 
     private
@@ -25,6 +25,10 @@ module DataImport
 
     def model
       raise '#model not implemented'
+    end
+
+    def id
+      raise '#id not implemented'
     end
 
   end

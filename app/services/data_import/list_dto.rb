@@ -2,16 +2,34 @@ module DataImport
 
   class ListDto < Dto
 
+    def id
+      object['id']
+    end
+
     private
 
     def model_attributes
-      attributes = object.transform_keys { |key| key.to_s.underscore }
-      attributes.delete('__collections__')
-      attributes
+      {
+        deck_id:,
+        cards:,
+        name:
+      }
     end
 
     def model
       List
+    end
+
+    def deck_id
+      object['deckId']
+    end
+
+    def cards
+      object['cards']
+    end
+
+    def name
+      object['name'].presence || 'no name'
     end
 
   end
