@@ -7,11 +7,14 @@ module DataImport
     let(:example_dto_class) { DeckDto }
     let(:game) { create(:game) }
     let(:archetype) { create(:archetype, game:) }
-    let(:example_instance) { build(:deck, archetype:, game:) }
+    let(:example_instance) { build(:deck) }
     let(:object) do
-      object = example_instance.attributes
-      object['archetype'] = archetype.attributes
-      object
+      {
+        'userId' => example_instance.user_id,
+        'id' => example_instance.id,
+        'name' => example_instance.name,
+        'archetype' => { 'identifier' => archetype.identifier }
+      }
     end
     let(:example_dto_instance) { example_dto_class.new(object:, game:) }
 
@@ -31,8 +34,8 @@ module DataImport
         describe 'when the record does not belong to a game' do
           let(:example_class) { List }
           let(:example_dto_class) { ListDto }
-          let(:example_instance) { build(:list) }
-          let(:object) { example_instance.attributes }
+          let(:example_instance) { build(:list, deck: create(:deck)) }
+          let(:object) { example_instance.attributes.transform_keys { |key| key.camelize(:lower).split('_').join } }
 
           it 'does not add the relationship to the passed game' do
             example_dto_instance.update_instance
@@ -54,7 +57,7 @@ module DataImport
 
         it 'updates the record' do
           example_dto_instance.update_instance
-          expect(example_class.find(example_instance.id).name).not_to eq('old name')
+          expect(example_class.find(example_instance['id']).name).not_to eq('old name')
         end
       end
     end
