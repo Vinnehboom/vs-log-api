@@ -142,6 +142,7 @@ GEM
       redis-namespace (~> 1.10)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    honeybadger (5.15.5)
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
@@ -404,6 +405,7 @@ DEPENDENCIES
   factory_bot_rails
   faker (~> 3.4)
   firebase_id_token (~> 3.0.0)
+  honeybadger (~> 5.15)
   image_processing
   pg
   puma (>= 5.0)
