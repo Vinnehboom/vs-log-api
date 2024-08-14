@@ -1,4 +1,4 @@
-class MatchRecord < ApplicationRecord
+class Match < ApplicationRecord
 
   belongs_to :list, optional: true
   belongs_to :deck, optional: true

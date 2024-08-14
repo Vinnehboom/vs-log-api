@@ -20,9 +20,9 @@ namespace :data_import do
     importer.import(data: read_file(args[:file]))
   end
 
-  task :match_records, %i[file game_id] => [:environment] do |_task, args|
+  task :matches, %i[file game_id] => [:environment] do |_task, args|
     game = find_game(args[:game_id])
-    importer = DataImport::Importer.new(dto_class: DataImport::MatchRecordDto, parser: DataImport::Parser.new, game:)
+    importer = DataImport::Importer.new(dto_class: DataImport::MatchDto, parser: DataImport::Parser.new, game:)
     importer.import(data: read_file(args[:file]))
   end
 

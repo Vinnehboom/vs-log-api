@@ -1,6 +1,6 @@
 require 'administrate/base_dashboard'
 
-class MatchRecordDashboard < Administrate::BaseDashboard
+class MatchDashboard < Administrate::BaseDashboard
 
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
@@ -80,7 +80,7 @@ class MatchRecordDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   # def display_resource(match_record)
-  #   "MatchRecord ##{match_record.id}"
+  #   "Match ##{match_record.id}"
   # end
 
 end

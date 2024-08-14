@@ -1,6 +1,6 @@
 module DataImport
 
-  class MatchRecordDto < Dto
+  class MatchDto < Dto
 
     def id
       object['id']
@@ -23,7 +23,7 @@ module DataImport
     end
 
     def model
-      MatchRecord
+      Match
     end
 
     def archetype

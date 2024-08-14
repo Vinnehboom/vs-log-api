@@ -12,6 +12,7 @@ class ListDashboard < Administrate::BaseDashboard
     id: Field::String,
     cards: Field::String.with_options(searchable: false),
     deck: Field::BelongsTo,
+    matches: Field::HasMany,
     name: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
@@ -34,6 +35,7 @@ class ListDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     cards
+    matches
     deck
     name
     created_at

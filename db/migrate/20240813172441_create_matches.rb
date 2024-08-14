@@ -1,6 +1,6 @@
-class CreateMatchRecords < ActiveRecord::Migration[7.1]
+class CreateMatches < ActiveRecord::Migration[7.1]
   def change
-    create_table :match_records, id: :uuid do |t|
+    create_table :matches, id: :uuid do |t|
       t.references :list, null: true, foreign_key: true, type: :uuid
       t.references :deck, null: true, foreign_key: true, type: :uuid
       t.references :opponent_archetype, null: false
@@ -13,8 +13,8 @@ class CreateMatchRecords < ActiveRecord::Migration[7.1]
       t.timestamps
     end
 
-    add_foreign_key "match_records", "archetypes", column: "opponent_archetype_id"
-    add_foreign_key "match_records", "archetypes", column: "archetype_id"
+    add_foreign_key "matches", "archetypes", column: "opponent_archetype_id"
+    add_foreign_key "matches", "archetypes", column: "archetype_id"
 
   end
 end
