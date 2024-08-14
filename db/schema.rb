@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_13_172441) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_14_145454) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -81,6 +81,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_13_172441) do
     t.index ["deck_id"], name: "index_lists_on_deck_id"
   end
 
+  create_table "match_games", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "match_id", null: false
+    t.string "result"
+    t.boolean "started", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_match_games_on_match_id"
+  end
+
   create_table "matches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "list_id"
     t.uuid "deck_id"
@@ -104,6 +113,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_13_172441) do
   add_foreign_key "decks", "archetypes"
   add_foreign_key "decks", "games"
   add_foreign_key "lists", "decks"
+  add_foreign_key "match_games", "matches"
   add_foreign_key "matches", "archetypes"
   add_foreign_key "matches", "archetypes", column: "opponent_archetype_id"
   add_foreign_key "matches", "decks"
