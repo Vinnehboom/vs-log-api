@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_14_145454) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_15_112351) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,8 +62,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_14_145454) do
     t.datetime "updated_at", null: false
     t.string "game_id", null: false
     t.bigint "archetype_id", null: false
+    t.boolean "active", default: false
     t.index ["archetype_id"], name: "index_decks_on_archetype_id"
     t.index ["game_id"], name: "index_decks_on_game_id"
+    t.index ["user_id", "active"], name: "index_decks_on_user_id_and_active", unique: true, where: "(active IS TRUE)"
   end
 
   create_table "games", id: :string, force: :cascade do |t|
