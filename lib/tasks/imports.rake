@@ -14,9 +14,21 @@ namespace :data_import do
     importer.import(data: read_file(args[:file]))
   end
 
+  task :active_decks, %i[file game_id] => [:environment] do |_task, args|
+    game = find_game(args[:game_id])
+    importer = DataImport::Importer.new(dto_class: DataImport::ActiveDeckDto, parser: DataImport::Parser.new, game:)
+    importer.import(data: read_file(args[:file]))
+  end
+
   task :lists, %i[file game_id] => [:environment] do |_task, args|
     game = find_game(args[:game_id])
     importer = DataImport::Importer.new(dto_class: DataImport::ListDto, parser: DataImport::Parser.new, game:)
+    importer.import(data: read_file(args[:file]))
+  end
+
+  task :active_lists, %i[file game_id] => [:environment] do |_task, args|
+    game = find_game(args[:game_id])
+    importer = DataImport::Importer.new(dto_class: DataImport::ActiveListDto, parser: DataImport::Parser.new, game:)
     importer.import(data: read_file(args[:file]))
   end
 
