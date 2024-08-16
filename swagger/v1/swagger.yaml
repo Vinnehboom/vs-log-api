@@ -4,6 +4,104 @@ info:
   title: API V1
   version: v1
 paths:
+  "/{game_id}/{deck_id}/lists":
+    get:
+      summary: Retrieve all the deck's lists
+      tags:
+      - Lists
+      parameters:
+      - name: game_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: deck_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: HTTP_FIREBASE_ID_TOKEN
+        in: header
+        schema:
+          type: string
+      responses:
+        '401':
+          description: unauthorized
+        '200':
+          description: Lists found
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                  - deck_id: '1234'
+                    id: '4567'
+                    user_id: qweqejqe1234
+                    name: Psychic Elegance
+                    cards:
+                    - card:
+                        apiSetId: swsh9
+                        name: Arceus VSTAR
+                        setId: BRS
+                        setNumber: '123'
+                      count: 3
+                    - card:
+                        apiSetId: swsh9
+                        name: Arceus V
+                        setId: BRS
+                        setNumber: '122'
+                      count: 4
+                    active: false
+  "/{game_id}/{deck_id}/lists/{id}":
+    get:
+      summary: Retrieve a list
+      tags:
+      - Lists
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: game_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: HTTP_FIREBASE_ID_TOKEN
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List found
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    deck_id: '1234'
+                    id: '4567'
+                    user_id: qweqejqe1234
+                    name: Psychic Elegance
+                    cards:
+                    - card:
+                        apiSetId: swsh9
+                        name: Arceus VSTAR
+                        setId: BRS
+                        setNumber: '123'
+                      count: 3
+                    - card:
+                        apiSetId: swsh9
+                        name: Arceus V
+                        setId: BRS
+                        setNumber: '122'
+                      count: 4
+                    active: false
+        '401':
+          description: unauthorized
+        '404':
+          description: Deck not found
   "/{game_id}/decks":
     get:
       summary: Retrieve all the user's decks
@@ -32,8 +130,7 @@ paths:
                   - game_id: PTCG
                     id: 1234-abcd
                     user_id: " 123d-adsd"
-                    archetype:
-                      identifier: gardevoir-ex
+                    archetype_id: 9
                     name: Psychic Elegance
   "/{game_id}/decks/{id}":
     get:
@@ -66,8 +163,7 @@ paths:
                     game_id: PTCG
                     id: 1234-abcd
                     user_id: " 123d-adsd"
-                    archetype:
-                      identifier: gardevoir-ex
+                    archetype_id: 9
                     name: Psychic Elegance
         '401':
           description: unauthorized

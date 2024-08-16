@@ -15,7 +15,7 @@ Metrics/BlockLength:
     - "lib/tasks/*.rake"
 RSpec/VariableName:
   Exclude:
-    - "spec/requests/api/*.rb"
+    - "spec/requests/api/**/*.rb"
 Rails/UnknownEnv:
   Environments:
     - production

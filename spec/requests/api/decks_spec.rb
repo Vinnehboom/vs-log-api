@@ -1,6 +1,6 @@
 require 'swagger_helper'
 
-RSpec.describe 'api/decks' do
+RSpec.describe 'decks' do
   before do
     FirebaseIdToken.test!
   end
