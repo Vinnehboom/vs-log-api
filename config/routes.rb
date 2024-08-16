@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   scope ":game", as: "game_id" do
-    resources :decks, only: %i[index show]
+    resources :decks, only: %i[index show] do
+      resources :lists, only: %i[index show], controller: "decks/lists"
+    end
   end
 
   # Defines the root path route ("/")
