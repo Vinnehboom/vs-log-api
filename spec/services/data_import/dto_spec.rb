@@ -39,7 +39,7 @@ module DataImport
 
           it 'does not add the relationship to the passed game' do
             example_dto_instance.update_instance
-            expect(List.last).not_to respond_to(:game)
+            expect(List.last).not_to respond_to(:game_id)
           end
         end
       end

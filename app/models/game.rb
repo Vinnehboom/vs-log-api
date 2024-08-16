@@ -5,4 +5,12 @@ class Game < ApplicationRecord
 
   validates :name, presence: true
 
+  def card_count_valid(count:)
+    minimum_count = deck_card_count <= count
+
+    return minimum_count unless exact_count
+
+    deck_card_count == count
+  end
+
 end
