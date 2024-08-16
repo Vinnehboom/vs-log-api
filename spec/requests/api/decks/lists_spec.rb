@@ -20,7 +20,9 @@ RSpec.describe 'decks/lists' do
         consumes 'application/json'
         parameter name: :game_id, in: :path, type: :string
         parameter name: :deck_id, in: :path, type: :string
-        parameter name: :HTTP_FIREBASE_ID_TOKEN, in: :header, type: :string
+        parameter name: :HTTP_FIREBASE_ID_TOKEN, in: :header, type: :string, required: true,
+                  example: 'FIREBASE_ID_TOKEN: eyadadan...'
+        parameter name: :active, in: :query, type: :boolean, required: false, description: 'filter for active lists'
 
         response '401', 'unauthorized' do
           let(:HTTP_FIREBASE_ID_TOKEN) { '32113312' }
@@ -59,7 +61,8 @@ RSpec.describe 'decks/lists' do
         parameter name: :id, in: :path, type: :string
         parameter name: :game_id, in: :path, type: :string
         parameter name: :deck_id, in: :path, type: :string
-        parameter name: :HTTP_FIREBASE_ID_TOKEN, in: :header, type: :string
+        parameter name: :HTTP_FIREBASE_ID_TOKEN, in: :header, type: :string, required: true,
+                  example: 'FIREBASE_ID_TOKEN: eyadadan...'
 
         response '200', 'List found' do
           schema type: :object,

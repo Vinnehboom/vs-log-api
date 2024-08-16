@@ -4,7 +4,7 @@ info:
   title: API V1
   version: v1
 paths:
-  "/{game_id}/{deck_id}/lists":
+  "/{game_id}/decks/{deck_id}/lists":
     get:
       summary: Retrieve all the deck's lists
       tags:
@@ -22,8 +22,17 @@ paths:
           type: string
       - name: HTTP_FIREBASE_ID_TOKEN
         in: header
+        required: true
+        example: 'FIREBASE_ID_TOKEN: eyadadan...'
         schema:
           type: string
+      - name: active
+        in: query
+        example: true
+        required: false
+        description: filter for active lists
+        schema:
+          type: boolean
       responses:
         '401':
           description: unauthorized
@@ -52,7 +61,7 @@ paths:
                         setNumber: '122'
                       count: 4
                     active: false
-  "/{game_id}/{deck_id}/lists/{id}":
+  "/{game_id}/decks/{deck_id}/lists/{id}":
     get:
       summary: Retrieve a list
       tags:
@@ -68,8 +77,15 @@ paths:
         required: true
         schema:
           type: string
+      - name: deck_id
+        in: path
+        required: true
+        schema:
+          type: string
       - name: HTTP_FIREBASE_ID_TOKEN
         in: header
+        required: true
+        example: 'FIREBASE_ID_TOKEN: eyadadan...'
         schema:
           type: string
       responses:
@@ -115,6 +131,8 @@ paths:
           type: string
       - name: HTTP_FIREBASE_ID_TOKEN
         in: header
+        required: true
+        example: 'FIREBASE_ID_TOKEN: eyadadan...'
         schema:
           type: string
       responses:
@@ -150,6 +168,8 @@ paths:
           type: string
       - name: HTTP_FIREBASE_ID_TOKEN
         in: header
+        required: true
+        example: 'FIREBASE_ID_TOKEN: eyadadan...'
         schema:
           type: string
       responses:

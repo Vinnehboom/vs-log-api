@@ -21,7 +21,11 @@ module Decks
     end
 
     def lists
-      @deck.lists
+      @deck.lists.where(query_params)
+    end
+
+    def query_params
+      params.permit(:active)
     end
 
   end
