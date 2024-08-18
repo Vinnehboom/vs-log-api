@@ -28,7 +28,6 @@ paths:
           type: string
       - name: active
         in: query
-        example: true
         required: false
         description: filter for active lists
         schema:
@@ -61,6 +60,62 @@ paths:
                         setNumber: '122'
                       count: 4
                     active: false
+    post:
+      summary: add a list to the deck
+      tags:
+      - Lists
+      parameters:
+      - name: game_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: deck_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: HTTP_FIREBASE_ID_TOKEN
+        in: header
+        required: true
+        example: 'FIREBASE_ID_TOKEN: eyadadan...'
+        schema:
+          type: string
+      responses:
+        '201':
+          description: list created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                active:
+                  type: boolean
+                cards:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      card:
+                        type: object
+                        properties:
+                          apiSetId:
+                            type: string
+                          name:
+                            type: string
+                          setId:
+                            type: string
+                          setNumber:
+                            type: string
+                        count: integer
+              required:
+              - name
+              - cards
   "/{game_id}/decks/{deck_id}/lists/{id}":
     get:
       summary: Retrieve a list
@@ -118,6 +173,47 @@ paths:
           description: unauthorized
         '404':
           description: Deck not found
+    patch:
+      summary: update a deck's list
+      tags:
+      - Lists
+      parameters:
+      - name: game_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: deck_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: HTTP_FIREBASE_ID_TOKEN
+        in: header
+        required: true
+        example: 'FIREBASE_ID_TOKEN: eyadadan...'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: list updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                active:
+                  type: boolean
+              required:
+              - name
   "/{game_id}/decks":
     get:
       summary: Retrieve all the user's decks

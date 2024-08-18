@@ -47,6 +47,50 @@ RSpec.describe 'decks/lists' do
           run_test!
         end
       end
+
+      post 'add a list to the deck' do
+        tags 'Lists'
+        consumes 'application/json'
+        parameter name: :game_id, in: :path, type: :string
+        parameter name: :deck_id, in: :path, type: :string
+        parameter name: :HTTP_FIREBASE_ID_TOKEN, in: :header, type: :string, required: true,
+                  example: 'FIREBASE_ID_TOKEN: eyadadan...'
+
+        parameter name: :list, in: :body, schema: {
+          type: :object,
+          properties: {
+            name: { type: :string },
+            active: { type: :boolean },
+            cards: { type: :array, items: {
+              type: :object,
+              properties: {
+                card: {
+                  type: :object,
+                  properties: {
+                    apiSetId: { type: :string },
+                    name: { type: :string },
+                    setId: { type: :string },
+                    setNumber: { type: :string }
+                  },
+                  count: :integer
+                }
+              }
+            } }
+          },
+          required: %w[name cards]
+        }
+
+        response '201', 'list created' do
+          let(:list) { build(:list, deck:, cards: [{ name: Faker::Games::Pokemon.name, 'count' => 60 }]).attributes }
+
+          run_test!
+        end
+
+        response '422', 'invalid request' do
+          let(:list) { build(:list, deck:, name: '') }
+          run_test!
+        end
+      end
     end
 
     path '/{game_id}/decks/{deck_id}/lists/{id}' do
@@ -99,6 +143,35 @@ RSpec.describe 'decks/lists' do
 
         response '404', 'Deck not found' do
           let(:id) { 'invalid' }
+
+          run_test!
+        end
+      end
+
+      patch "update a deck's list" do
+        tags 'Lists'
+        consumes 'application/json'
+        parameter name: :game_id, in: :path, type: :string
+        parameter name: :deck_id, in: :path, type: :string
+        parameter name: :id, in: :path, type: :string
+        parameter name: :HTTP_FIREBASE_ID_TOKEN, in: :header, type: :string, required: true,
+                  example: 'FIREBASE_ID_TOKEN: eyadadan...'
+
+        parameter name: :list, getter: :list_body, in: :body, schema: {
+          type: :object,
+          properties: {
+            name: { type: :string },
+            active: { type: :boolean }
+          },
+          required: ['name']
+        }
+
+        response '200', 'list updated' do
+          let(:list_body) do
+            list.name = 'new name'
+            list.attributes
+          end
+          let(:id) { list.id }
 
           run_test!
         end

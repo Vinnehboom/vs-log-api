@@ -29,7 +29,7 @@ Style/DocumentDynamicEvalDefinition:
 RSpec/MultipleExpectations:
   Max: 6
 RSpec/MultipleMemoizedHelpers:
-  Max: 8
+  Max: 16
 RSpec/InstanceVariable:
   Enabled: false
 RSpec/NestedGroups:
