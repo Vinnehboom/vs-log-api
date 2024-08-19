@@ -35,12 +35,9 @@ RSpec.describe 'decks/lists' do
             id: '4567',
             user_id: 'qweqejqe1234',
             name: 'Psychic Elegance',
-            cards: [{ 'card' => { 'apiSetId' => 'swsh9',
-                                  'name' => 'Arceus VSTAR', 'setId' => 'BRS', 'setNumber' => '123' }, 'count' => 3 },
-                    {
-                      'card' => { 'apiSetId' => 'swsh9',
-                                  'name' => 'Arceus V', 'setId' => 'BRS', 'setNumber' => '122' }, 'count' => 4
-                    }],
+            list_cards: [{ 'set_id' => 'BRS', 'name' => 'Arceus VSTAR', 'set_number' => '123', 'count' => 3 },
+                         { 'set_id' => 'BRS', 'name' => 'Arceus V',
+                           'set_number' => '122', 'count' => 4 }],
             active: false
           }]
 
@@ -81,7 +78,7 @@ RSpec.describe 'decks/lists' do
         }
 
         response '201', 'list created' do
-          let(:list) { build(:list, deck:, cards: [{ name: Faker::Games::Pokemon.name, 'count' => 60 }]).attributes }
+          let(:list) { build(:list, deck:).attributes }
 
           run_test!
         end
@@ -113,23 +110,27 @@ RSpec.describe 'decks/lists' do
                  properties: {
                    deck_id: { type: :string },
                    id: { type: :string },
-                   cards: { type: :json },
-                   name: { type: :string },
-                   active: { type: :boolean }
-                 },
-                 required: %w[id name deck_id cards]
+                   list_cards: { type: :array, items: {
+                                                 type: :object,
+                                                 properties: {
+                                                   set_id: { type: :string },
+                                                   name: { type: :string },
+                                                   set_number: { type: :string },
+                                                   count: { type: :integer }
+                                                 }
+                                               },
+                                 name: { type: :string },
+                                 active: { type: :boolean } },
+                   required: %w[id name deck_id list_cards]
+                 }
 
           example 'application/json', :example_key, {
             deck_id: '1234',
             id: '4567',
             user_id: 'qweqejqe1234',
             name: 'Psychic Elegance',
-            cards: [{ 'card' => { 'apiSetId' => 'swsh9',
-                                  'name' => 'Arceus VSTAR', 'setId' => 'BRS', 'setNumber' => '123' }, 'count' => 3 },
-                    {
-                      'card' => { 'apiSetId' => 'swsh9', 'name' => 'Arceus V', 'setId' => 'BRS',
-                                  'setNumber' => '122' }, 'count' => 4
-                    }],
+            list_cards: [{ 'set_id' => 'BRS', 'name' => 'Arceus VSTAR', 'set_number' => '123', 'count' => 3 },
+                         { 'set_id' => 'BRS', 'name' => 'Arceus V', 'set_number' => '122', 'count' => 4 }],
             active: false
           }
 

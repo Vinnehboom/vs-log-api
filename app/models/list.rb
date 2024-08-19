@@ -7,11 +7,12 @@ class List < ApplicationRecord
   belongs_to :deck
   has_one :game, through: :deck
   has_many :matches, dependent: :nullify
+  has_many :list_cards, class_name: 'Card', dependent: :destroy
 
   validates :name, presence: true
-  validates :cards, presence: true
   validates :active, uniqueness: { scope: :deck_id, conditions: -> { active } }
   validate :card_total
+  accepts_nested_attributes_for :list_cards
 
   private
 
@@ -20,7 +21,7 @@ class List < ApplicationRecord
   end
 
   def card_count
-    cards.sum { |card| card['count'] }
+    list_cards.sum(&:count)
   end
 
   def card_total
