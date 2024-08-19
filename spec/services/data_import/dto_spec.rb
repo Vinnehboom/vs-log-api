@@ -35,7 +35,12 @@ module DataImport
           let(:example_class) { List }
           let(:example_dto_class) { ListDto }
           let(:example_instance) { build(:list, deck: create(:deck)) }
-          let(:object) { example_instance.attributes.transform_keys { |key| key.camelize(:lower).split('_').join } }
+          let(:object) do
+            object = example_instance.attributes.transform_keys { |key| key.camelize(:lower).split('_').join }
+            object = object.merge('cards' => [{ 'card' => { 'name' => 'test', 'setId' => 'PAF', 'setNumber' => '1' },
+                                                'count' => 60 }])
+            object
+          end
 
           it 'does not add the relationship to the passed game' do
             example_dto_instance.update_instance

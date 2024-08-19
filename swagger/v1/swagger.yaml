@@ -46,18 +46,14 @@ paths:
                     id: '4567'
                     user_id: qweqejqe1234
                     name: Psychic Elegance
-                    cards:
-                    - card:
-                        apiSetId: swsh9
-                        name: Arceus VSTAR
-                        setId: BRS
-                        setNumber: '123'
+                    list_cards:
+                    - set_id: BRS
+                      name: Arceus VSTAR
+                      set_number: '123'
                       count: 3
-                    - card:
-                        apiSetId: swsh9
-                        name: Arceus V
-                        setId: BRS
-                        setNumber: '122'
+                    - set_id: BRS
+                      name: Arceus V
+                      set_number: '122'
                       count: 4
                     active: false
     post:
@@ -155,18 +151,14 @@ paths:
                     id: '4567'
                     user_id: qweqejqe1234
                     name: Psychic Elegance
-                    cards:
-                    - card:
-                        apiSetId: swsh9
-                        name: Arceus VSTAR
-                        setId: BRS
-                        setNumber: '123'
+                    list_cards:
+                    - set_id: BRS
+                      name: Arceus VSTAR
+                      set_number: '123'
                       count: 3
-                    - card:
-                        apiSetId: swsh9
-                        name: Arceus V
-                        setId: BRS
-                        setNumber: '122'
+                    - set_id: BRS
+                      name: Arceus V
+                      set_number: '122'
                       count: 4
                     active: false
         '401':
