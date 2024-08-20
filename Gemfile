@@ -11,6 +11,7 @@ gem 'administrate-field-active_storage'
 gem 'aws-sdk-s3'
 gem 'image_processing'
 gem 'pg'
+gem 'pokemon_tcg_sdk'
 gem 'puma', '>= 5.0'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]

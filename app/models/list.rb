@@ -5,7 +5,6 @@ class List < ApplicationRecord
   scope :active, -> { where(active: true) }
 
   belongs_to :deck
-  has_one :game, through: :deck
   has_many :matches, dependent: :nullify
   has_many :list_cards, class_name: 'Card', dependent: :destroy
 
@@ -13,6 +12,10 @@ class List < ApplicationRecord
   validates :active, uniqueness: { scope: :deck_id, conditions: -> { active } }
   validate :card_total
   accepts_nested_attributes_for :list_cards
+
+  def game
+    deck&.game
+  end
 
   private
 
@@ -25,7 +28,9 @@ class List < ApplicationRecord
   end
 
   def card_total
-    game&.card_count_valid(count: card_count)
+    return if game&.card_count_valid(count: card_count)
+
+    errors.add(:list_cards, :invalid_card_count)
   end
 
 end
