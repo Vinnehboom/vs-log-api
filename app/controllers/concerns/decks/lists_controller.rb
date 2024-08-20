@@ -6,12 +6,12 @@ module Decks
 
     def index
       @lists = lists
-      render json: @lists, include: { list_cards: { only: %i[count name set_id set_number] } }
+      render json: @lists, include: { list_cards: { only: %i[count name set_id set_number], methods: :image } }
     end
 
     def show
       @list = lists.find(params[:id])
-      render json: @list, include: { list_cards: { only: %i[count name set_id set_number] } }
+      render json: @list, include: { list_cards: { only: %i[count name set_id set_number], methods: :image } }
     end
 
     def create
