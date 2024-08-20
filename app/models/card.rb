@@ -6,4 +6,10 @@ class Card < ApplicationRecord
   validates :count, presence: true
   validates :set_number, presence: true
 
+  def image
+    Cards::ImageFactory.call(card: self, game:).url
+  end
+
+  delegate :game, to: :list
+
 end

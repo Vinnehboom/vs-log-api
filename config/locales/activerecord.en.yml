@@ -1,3 +1,10 @@
 en:
   errors:
     unauthorized: User not authorized
+  activerecord:
+    errors:
+      models:
+        list:
+          attributes:
+            list_cards:
+              invalid_card_count: "List does not meet required card count"
