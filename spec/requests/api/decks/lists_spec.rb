@@ -35,9 +35,16 @@ RSpec.describe 'decks/lists' do
             id: '4567',
             user_id: 'qweqejqe1234',
             name: 'Psychic Elegance',
-            list_cards: [{ 'set_id' => 'BRS', 'name' => 'Arceus VSTAR', 'set_number' => '123', 'count' => 3 },
-                         { 'set_id' => 'BRS', 'name' => 'Arceus V',
-                           'set_number' => '122', 'count' => 4 }],
+            list_cards: [{ 'set_id' => 'BRS',
+                           'name' => 'Arceus VSTAR',
+                           'set_number' => '123',
+                           'count' => 3,
+                           'image' => 'https://images.pokemontcg.io/swsh9/123.png' },
+                         { 'set_id' => 'BRS',
+                           'name' => 'Arceus V',
+                           'set_number' => '122',
+                           'count' => 4,
+                           'image' => 'https://images.pokemontcg.io/swsh9/122.png' }],
             active: false
           }]
 
@@ -116,7 +123,8 @@ RSpec.describe 'decks/lists' do
                                                    set_id: { type: :string },
                                                    name: { type: :string },
                                                    set_number: { type: :string },
-                                                   count: { type: :integer }
+                                                   count: { type: :integer },
+                                                   image: { type: :string }
                                                  }
                                                },
                                  name: { type: :string },
@@ -129,8 +137,16 @@ RSpec.describe 'decks/lists' do
             id: '4567',
             user_id: 'qweqejqe1234',
             name: 'Psychic Elegance',
-            list_cards: [{ 'set_id' => 'BRS', 'name' => 'Arceus VSTAR', 'set_number' => '123', 'count' => 3 },
-                         { 'set_id' => 'BRS', 'name' => 'Arceus V', 'set_number' => '122', 'count' => 4 }],
+            list_cards: [{ 'set_id' => 'BRS',
+                           'name' => 'Arceus VSTAR',
+                           'set_number' => '123',
+                           'count' => 3,
+                           'image' => 'https://images.pokemontcg.io/swsh9/123.png' },
+                         { 'set_id' => 'BRS',
+                           'name' => 'Arceus V',
+                           'set_number' => '122',
+                           'count' => 4,
+                           'image' => 'https://images.pokemontcg.io/swsh9/122.png' }],
             active: false
           }
 
