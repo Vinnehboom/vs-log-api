@@ -19,6 +19,15 @@ class DecksController < ApplicationController
     end
   end
 
+  def update
+    @deck = decks.find(params[:id])
+    if @deck.update(deck_params)
+      render @deck
+    else
+      render @deck.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def decks

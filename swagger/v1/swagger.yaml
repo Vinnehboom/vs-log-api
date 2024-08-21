@@ -351,6 +351,45 @@ paths:
           description: unauthorized
         '404':
           description: Deck not found
+    patch:
+      summary: update a deck
+      tags:
+      - Decks
+      parameters:
+      - name: game_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: HTTP_FIREBASE_ID_TOKEN
+        in: header
+        required: true
+        example: 'FIREBASE_ID_TOKEN: eyadadan...'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: deck updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                active:
+                  type: boolean
+                archetype_id:
+                  type: string
+              required:
+              - name
+              - archetype_id
 servers:
 - url: https://{defaultHost}
   variables:

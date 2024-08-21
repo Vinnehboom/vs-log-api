@@ -118,6 +118,34 @@ RSpec.describe 'decks' do
           run_test!
         end
       end
+
+      patch 'update a deck' do
+        tags 'Decks'
+        consumes 'application/json'
+        parameter name: :game_id, in: :path, type: :string
+        parameter name: :id, in: :path, type: :string
+        parameter name: :HTTP_FIREBASE_ID_TOKEN, in: :header, type: :string, required: true,
+                  example: 'FIREBASE_ID_TOKEN: eyadadan...'
+
+        parameter name: :deck, getter: :deck_body, in: :body, schema: {
+          type: :object,
+          properties: {
+            name: { type: :string },
+            active: { type: :boolean },
+            archetype_id: { type: :string }
+          },
+          required: %w[name archetype_id]
+        }
+
+        response '200', 'deck updated' do
+          let(:deck_body) do
+            deck.name = 'new name'
+            deck.attributes
+          end
+
+          run_test!
+        end
+      end
     end
   end
 end
