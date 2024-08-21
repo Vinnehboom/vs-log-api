@@ -9,7 +9,7 @@ module Cards
     private
 
     def api_set_id
-      Pokemon::API_SET_IDS[card.set_id.to_sym] || 'sve'
+      Pokemon::API_SET_IDS[card.set_id] || 'sve'
     end
 
     def set_number
