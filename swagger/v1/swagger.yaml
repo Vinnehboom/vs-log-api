@@ -62,6 +62,9 @@ paths:
       summary: add a list to the deck
       tags:
       - Lists
+      description: Add a list to the target deck. The cards argument of the body takes
+        a split list of a usual export from your game client or online resource. Invalid
+        card strings will be ignored automatically.
       parameters:
       - name: game_id
         in: path
@@ -97,20 +100,10 @@ paths:
                 cards:
                   type: array
                   items:
-                    type: object
-                    properties:
-                      card:
-                        type: object
-                        properties:
-                          apiSetId:
-                            type: string
-                          name:
-                            type: string
-                          setId:
-                            type: string
-                          setNumber:
-                            type: string
-                        count: integer
+                    type: string
+                  example:
+                  - 3 Arceus VSTAR BRS 123
+                  - 3 Arceus V BRS 122
               required:
               - name
               - cards

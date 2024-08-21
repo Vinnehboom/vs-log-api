@@ -1,16 +1,13 @@
 module Cards
 
-  class ImageFactory
+  class ImageFactory < ApplicationService
 
     attr_accessor :game, :card
 
     def initialize(card:, game:)
       @game = game
       @card = card
-    end
-
-    def self.call(...)
-      new(...).call
+      super()
     end
 
     def call
