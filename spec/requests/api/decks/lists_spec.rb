@@ -6,7 +6,7 @@ RSpec.describe 'decks/lists' do
   end
 
   describe 'Lists API' do
-    let(:game) { create(:game) }
+    let(:game) { create(:game, id: 'PTCG') }
     let(:HTTP_FIREBASE_ID_TOKEN) { create_firebase_userid_token(user: firebase_user_id) }
     let(:deck) { create(:deck, game:, user_id: firebase_user_id) }
 
@@ -55,6 +55,9 @@ RSpec.describe 'decks/lists' do
       post 'add a list to the deck' do
         tags 'Lists'
         consumes 'application/json'
+        description 'Add a list to the target deck.
+The cards argument of the body takes a split list of a usual export from your game client or online resource.
+Invalid card strings will be ignored automatically.'
         parameter name: :game_id, in: :path, type: :string
         parameter name: :deck_id, in: :path, type: :string
         parameter name: :HTTP_FIREBASE_ID_TOKEN, in: :header, type: :string, required: true,
@@ -65,33 +68,38 @@ RSpec.describe 'decks/lists' do
           properties: {
             name: { type: :string },
             active: { type: :boolean },
-            cards: { type: :array, items: {
-              type: :object,
-              properties: {
-                card: {
-                  type: :object,
-                  properties: {
-                    apiSetId: { type: :string },
-                    name: { type: :string },
-                    setId: { type: :string },
-                    setNumber: { type: :string }
-                  },
-                  count: :integer
-                }
-              }
-            } }
+            cards: {
+              type: :array, items: {
+                type: :string
+              }, example: [
+                '3 Arceus VSTAR BRS 123',
+                '3 Arceus V BRS 122'
+              ]
+            }
           },
           required: %w[name cards]
         }
 
         response '201', 'list created' do
-          let(:list) { build(:list, deck:).attributes }
+          let(:list) do
+            { list: build(:list, deck:).attributes.merge(cards: [
+                                                           '3 Arceus VSTAR BRS 123',
+                                                           '3 Arceus V BRS 122',
+                                                           '54 Fire Energy Energy 5'
+                                                         ]) }
+          end
 
           run_test!
         end
 
         response '422', 'invalid request' do
-          let(:list) { build(:list, deck:, name: '') }
+          let(:list) do
+            { list: build(:list, deck:).attributes.merge(cards: [
+                                                           '3 Arceus VSTAR BRS 123',
+                                                           '3 Arceus V BRS 122'
+                                                         ]) }
+          end
+
           run_test!
         end
       end
