@@ -1,0 +1,78 @@
+version: 2.1
+
+
+orbs:
+  ruby: circleci/ruby@2.1.1
+
+executors:
+  lite-container:
+    resource_class: small
+    docker:
+      - image: cimg/base:2022.03
+  lite-ruby-container:
+    resource_class: small
+    docker:
+      - image: cimg/ruby:3.2.4
+  test-container:
+    resource_class: medium
+    docker:
+      - image: cimg/ruby:3.2.4-browsers
+      - image: cimg/redis:6.2.6
+      - image: cimg/postgres:14.0
+        environment:
+          POSTGRES_USER: vs-log-api
+          POSTGRES_DB: vs-log-api-test
+          POSTGRES_PASSWORD: vs-log-api
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      PGHOST: 127.0.0.1
+      RAILS_ENV: test
+
+jobs:
+  test:
+    executor: test-container
+
+    steps:
+      # Checkout the code as the first step.
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Waiting for Redis primary to be ready
+          command: dockerize -wait tcp://localhost:6379 -timeout 1m
+      - run:
+          name: Database setup
+          command: bundle exec rails db:create && bundle exec rails db:schema:load --trace
+      - run:
+          name: Assets precompile
+          command: bundle exec rake assets:precompile
+      - run:
+          name: tests
+          command: bundle exec rspec
+      - ruby/install-deps
+  lint:
+    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/executor-intro/ & https://circleci.com/docs/configuration-reference/#executor-job
+    executor: lite-ruby-container
+    # Add steps to the job
+    # See: https://circleci.com/docs/jobs-steps/#steps-overview & https://circleci.com/docs/configuration-reference/#steps
+    steps:
+      # Checkout the code as the first step.
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: linter
+          command: bundle exec rubocop -P
+      - ruby/install-deps
+
+# Orchestrate jobs using workflows
+# See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
+workflows:
+  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run.
+    jobs:
+      - test
+      - lint
