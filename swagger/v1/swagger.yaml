@@ -276,6 +276,42 @@ paths:
                     user_id: " 123d-adsd"
                     archetype_id: 9
                     name: Psychic Elegance
+    post:
+      summary: add a deck
+      tags:
+      - Decks
+      parameters:
+      - name: game_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: HTTP_FIREBASE_ID_TOKEN
+        in: header
+        required: true
+        example: 'FIREBASE_ID_TOKEN: eyadadan...'
+        schema:
+          type: string
+      responses:
+        '201':
+          description: deck created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                active:
+                  type: boolean
+                archetype_id:
+                  type: string
+              required:
+              - name
+              - archetype_id
   "/{game_id}/decks/{id}":
     get:
       summary: Retrieve a deck

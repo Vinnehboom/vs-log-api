@@ -37,6 +37,40 @@ RSpec.describe 'decks' do
           run_test!
         end
       end
+
+      post 'add a deck' do
+        tags 'Decks'
+        consumes 'application/json'
+        parameter name: :game_id, in: :path, type: :string
+        parameter name: :HTTP_FIREBASE_ID_TOKEN, in: :header, type: :string, required: true,
+                  example: 'FIREBASE_ID_TOKEN: eyadadan...'
+
+        parameter name: :deck, in: :body, schema: {
+          type: :object,
+          properties: {
+            name: { type: :string },
+            active: { type: :boolean },
+            archetype_id: { type: :string }
+          },
+          required: %w[name archetype_id]
+        }
+
+        response '201', 'deck created' do
+          let(:deck) do
+            { deck: build(:deck, archetype_id: create(:archetype).id).attributes }
+          end
+
+          run_test!
+        end
+
+        response '422', 'invalid request' do
+          let(:deck) do
+            { deck: build(:deck, name: nil).attributes }
+          end
+
+          run_test!
+        end
+      end
     end
 
     path '/{game_id}/decks/{id}' do

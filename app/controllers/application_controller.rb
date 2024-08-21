@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
 
-  attr_reader :game
+  attr_reader :game, :user
 
   before_action :set_game
   before_action :verify_user
@@ -17,6 +17,10 @@ class ApplicationController < ActionController::API
     @user = FirebaseIdToken::Signature.verify(request.headers['HTTP_FIREBASE_ID_TOKEN'])
 
     raise UnauthorizedError unless @user
+  end
+
+  def user_id
+    user['user_id']
   end
 
 end
