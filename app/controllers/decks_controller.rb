@@ -28,6 +28,15 @@ class DecksController < ApplicationController
     end
   end
 
+  def destroy
+    @deck = decks.find(params[:id])
+    if @deck.destroy
+      head :no_content
+    else
+      render @deck.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def decks
