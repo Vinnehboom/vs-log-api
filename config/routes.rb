@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   scope ":game", as: "game_id" do
     resources :decks, only: %i[index show] do
-      resources :lists, only: %i[index show create update], controller: "decks/lists"
+      resources :lists, only: %i[index show create update destroy], controller: "decks/lists"
     end
   end
 

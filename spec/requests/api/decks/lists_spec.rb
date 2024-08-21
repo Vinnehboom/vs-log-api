@@ -201,6 +201,21 @@ Invalid card strings will be ignored automatically.'
           run_test!
         end
       end
+
+      delete "delete a deck's list" do
+        consumes 'application/json'
+        parameter name: :game_id, in: :path, type: :string
+        parameter name: :deck_id, in: :path, type: :string
+        parameter name: :id, in: :path, type: :string
+        parameter name: :HTTP_FIREBASE_ID_TOKEN, in: :header, type: :string, required: true,
+                  example: 'FIREBASE_ID_TOKEN: eyadadan...'
+
+        response '204', 'list deleted' do
+          let(:id) { list.id }
+
+          run_test!
+        end
+      end
     end
   end
 end

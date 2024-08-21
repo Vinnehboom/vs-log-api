@@ -62,9 +62,10 @@ paths:
       summary: add a list to the deck
       tags:
       - Lists
-      description: Add a list to the target deck. The cards argument of the body takes
-        a split list of a usual export from your game client or online resource. Invalid
-        card strings will be ignored automatically.
+      description: |-
+        Add a list to the target deck.
+        The cards argument of the body takes a split list of a usual export from your game client or online resource.
+        Invalid card strings will be ignored automatically.
       parameters:
       - name: game_id
         in: path
@@ -203,6 +204,33 @@ paths:
                   type: boolean
               required:
               - name
+    delete:
+      summary: delete a deck's list
+      parameters:
+      - name: game_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: deck_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: HTTP_FIREBASE_ID_TOKEN
+        in: header
+        required: true
+        example: 'FIREBASE_ID_TOKEN: eyadadan...'
+        schema:
+          type: string
+      responses:
+        '204':
+          description: list deleted
   "/{game_id}/decks":
     get:
       summary: Retrieve all the user's decks
