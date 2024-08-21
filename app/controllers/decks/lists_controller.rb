@@ -12,8 +12,8 @@ module Decks
     end
 
     def show
-      @list = lists.includes(:list_cards).find(params[:id])
-      render json: @list, include: { list_cards: { only: %i[count name set_id set_number], methods: :image } }
+      @list = lists.includes(:cards).find(params[:id])
+      render json: @list, include: { cards: { only: %i[count name set_id set_number], methods: :image } }
     end
 
     def create
@@ -53,8 +53,8 @@ module Decks
       return {} if expand_params.blank?
 
       expand_params.map do |relation|
-        if relation == 'list_cards'
-          { list_cards: { methods: :image } }
+        if relation == 'cards'
+          { cards: { methods: :image } }
         else
           relation.to_sym
         end
@@ -66,8 +66,8 @@ module Decks
     end
 
     def build_list
-      list_cards = parse_cards
-      lists.new(**list_params, list_cards_attributes: list_cards)
+      cards = parse_cards
+      lists.new(**list_params, cards_attributes: cards)
     end
 
     def query_params
@@ -84,7 +84,7 @@ module Decks
 
     def expand_params
       params.fetch(:expand, '').split(',').map(&:strip).select do |expansion|
-        %w[list_cards].include?(expansion)
+        %w[cards].include?(expansion)
       end
     end
 

@@ -11,7 +11,7 @@ module DataImport
     def model_attributes
       {
         deck_id:,
-        list_cards_attributes:,
+        cards_attributes:,
         name:
       }
     end
@@ -24,7 +24,7 @@ module DataImport
       object['deckId']
     end
 
-    def list_cards_attributes
+    def cards_attributes
       object['cards'].map do |card_object|
         {
           name: card_object['card']['name'].presence || 'missing name',

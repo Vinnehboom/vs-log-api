@@ -24,7 +24,7 @@ RSpec.describe 'decks/lists' do
                   example: 'FIREBASE_ID_TOKEN: eyadadan...'
         parameter name: :active, in: :query, type: :boolean, required: false, description: 'filter for active lists'
         parameter name: :expand, in: :query, type: :string, required: false,
-                  description: 'Allow for expansion of relationships. e.g.: ?expand=list_cards'
+                  description: 'Allow for expansion of relationships. e.g.: ?expand=cards'
 
         response '401', 'unauthorized' do
           let(:HTTP_FIREBASE_ID_TOKEN) { '32113312' }
@@ -45,16 +45,16 @@ RSpec.describe 'decks/lists' do
             id: '4567',
             user_id: 'qweqejqe1234',
             name: 'Psychic Elegance',
-            list_cards: [{ 'set_id' => 'BRS',
-                           'name' => 'Arceus VSTAR',
-                           'set_number' => '123',
-                           'count' => 3,
-                           'image' => 'https://images.pokemontcg.io/swsh9/123.png' },
-                         { 'set_id' => 'BRS',
-                           'name' => 'Arceus V',
-                           'set_number' => '122',
-                           'count' => 4,
-                           'image' => 'https://images.pokemontcg.io/swsh9/122.png' }],
+            cards: [{ 'set_id' => 'BRS',
+                      'name' => 'Arceus VSTAR',
+                      'set_number' => '123',
+                      'count' => 3,
+                      'image' => 'https://images.pokemontcg.io/swsh9/123.png' },
+                    { 'set_id' => 'BRS',
+                      'name' => 'Arceus V',
+                      'set_number' => '122',
+                      'count' => 4,
+                      'image' => 'https://images.pokemontcg.io/swsh9/122.png' }],
             active: false
           }]
 
@@ -135,19 +135,19 @@ Invalid card strings will be ignored automatically.'
                  properties: {
                    deck_id: { type: :string },
                    id: { type: :string },
-                   list_cards: { type: :array, items: {
-                                                 type: :object,
-                                                 properties: {
-                                                   set_id: { type: :string },
-                                                   name: { type: :string },
-                                                   set_number: { type: :string },
-                                                   count: { type: :integer },
-                                                   image: { type: :string }
-                                                 }
-                                               },
-                                 name: { type: :string },
-                                 active: { type: :boolean } },
-                   required: %w[id name deck_id list_cards]
+                   cards: { type: :array, items: {
+                                            type: :object,
+                                            properties: {
+                                              set_id: { type: :string },
+                                              name: { type: :string },
+                                              set_number: { type: :string },
+                                              count: { type: :integer },
+                                              image: { type: :string }
+                                            }
+                                          },
+                            name: { type: :string },
+                            active: { type: :boolean } },
+                   required: %w[id name deck_id cards]
                  }
 
           example 'application/json', :example_key, {
@@ -155,16 +155,16 @@ Invalid card strings will be ignored automatically.'
             id: '4567',
             user_id: 'qweqejqe1234',
             name: 'Psychic Elegance',
-            list_cards: [{ 'set_id' => 'BRS',
-                           'name' => 'Arceus VSTAR',
-                           'set_number' => '123',
-                           'count' => 3,
-                           'image' => 'https://images.pokemontcg.io/swsh9/123.png' },
-                         { 'set_id' => 'BRS',
-                           'name' => 'Arceus V',
-                           'set_number' => '122',
-                           'count' => 4,
-                           'image' => 'https://images.pokemontcg.io/swsh9/122.png' }],
+            cards: [{ 'set_id' => 'BRS',
+                      'name' => 'Arceus VSTAR',
+                      'set_number' => '123',
+                      'count' => 3,
+                      'image' => 'https://images.pokemontcg.io/swsh9/123.png' },
+                    { 'set_id' => 'BRS',
+                      'name' => 'Arceus V',
+                      'set_number' => '122',
+                      'count' => 4,
+                      'image' => 'https://images.pokemontcg.io/swsh9/122.png' }],
             active: false
           }
 

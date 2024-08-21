@@ -35,7 +35,7 @@ paths:
       - name: expand
         in: query
         required: false
-        description: 'Allow for expansion of relationships. e.g.: ?expand=list_cards'
+        description: 'Allow for expansion of relationships. e.g.: ?expand=cards'
         schema:
           type: string
       responses:
@@ -59,7 +59,7 @@ paths:
                     id: '4567'
                     user_id: qweqejqe1234
                     name: Psychic Elegance
-                    list_cards:
+                    cards:
                     - set_id: BRS
                       name: Arceus VSTAR
                       set_number: '123'
@@ -160,7 +160,7 @@ paths:
                     id: '4567'
                     user_id: qweqejqe1234
                     name: Psychic Elegance
-                    list_cards:
+                    cards:
                     - set_id: BRS
                       name: Arceus VSTAR
                       set_number: '123'
