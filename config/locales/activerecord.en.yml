@@ -6,5 +6,5 @@ en:
       models:
         list:
           attributes:
-            list_cards:
+            cards:
               invalid_card_count: "List does not meet required card count"
