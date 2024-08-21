@@ -32,6 +32,12 @@ paths:
         description: filter for active lists
         schema:
           type: boolean
+      - name: expand
+        in: query
+        required: false
+        description: 'Allow for expansion of relationships. e.g.: ?expand=list_cards'
+        schema:
+          type: string
       responses:
         '401':
           description: unauthorized
@@ -40,7 +46,14 @@ paths:
           content:
             application/json:
               examples:
-                example_key:
+                base:
+                  value:
+                  - deck_id: '1234'
+                    id: '4567'
+                    user_id: qweqejqe1234
+                    name: Psychic Elegance
+                    active: false
+                expanded_cards:
                   value:
                   - deck_id: '1234'
                     id: '4567'
