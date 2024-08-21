@@ -23,6 +23,8 @@ RSpec.describe 'decks/lists' do
         parameter name: :HTTP_FIREBASE_ID_TOKEN, in: :header, type: :string, required: true,
                   example: 'FIREBASE_ID_TOKEN: eyadadan...'
         parameter name: :active, in: :query, type: :boolean, required: false, description: 'filter for active lists'
+        parameter name: :expand, in: :query, type: :string, required: false,
+                  description: 'Allow for expansion of relationships. e.g.: ?expand=list_cards'
 
         response '401', 'unauthorized' do
           let(:HTTP_FIREBASE_ID_TOKEN) { '32113312' }
@@ -30,7 +32,15 @@ RSpec.describe 'decks/lists' do
         end
 
         response '200', 'Lists found' do
-          example 'application/json', :example_key, [{
+          example 'application/json', :base, [{
+            deck_id: '1234',
+            id: '4567',
+            user_id: 'qweqejqe1234',
+            name: 'Psychic Elegance',
+            active: false
+          }]
+
+          example 'application/json', :expanded_cards, [{
             deck_id: '1234',
             id: '4567',
             user_id: 'qweqejqe1234',
