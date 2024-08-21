@@ -32,6 +32,15 @@ module Decks
       end
     end
 
+    def destroy
+      @list = lists.find(params[:id])
+      if @list.destroy
+        head :no_content
+      else
+        render json: @list.errors, status: :unprocessable_entity
+      end
+    end
+
     private
 
     def set_deck
