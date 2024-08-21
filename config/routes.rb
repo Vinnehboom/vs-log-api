@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   scope ":game", as: "game_id" do
-    resources :decks, only: %i[index show] do
+    resources :decks, only: %i[index show create] do
       resources :lists, only: %i[index show create update destroy], controller: "decks/lists"
     end
   end
