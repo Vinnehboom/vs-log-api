@@ -390,6 +390,28 @@ paths:
               required:
               - name
               - archetype_id
+    delete:
+      summary: delete a deck
+      parameters:
+      - name: game_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: HTTP_FIREBASE_ID_TOKEN
+        in: header
+        required: true
+        example: 'FIREBASE_ID_TOKEN: eyadadan...'
+        schema:
+          type: string
+      responses:
+        '204':
+          description: deck deleted
 servers:
 - url: https://{defaultHost}
   variables:

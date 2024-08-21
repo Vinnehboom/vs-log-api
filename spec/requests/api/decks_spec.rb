@@ -146,6 +146,21 @@ RSpec.describe 'decks' do
           run_test!
         end
       end
+
+      delete 'delete a deck' do
+        consumes 'application/json'
+        parameter name: :game_id, in: :path, type: :string
+        parameter name: :id, in: :path, type: :string
+        parameter name: :HTTP_FIREBASE_ID_TOKEN, in: :header, type: :string, required: true,
+                  example: 'FIREBASE_ID_TOKEN: eyadadan...'
+
+        response '204', 'deck deleted' do
+          let(:deck) { create(:deck, game:, user_id: firebase_user_id) }
+          let(:id) { deck.id }
+
+          run_test!
+        end
+      end
     end
   end
 end
