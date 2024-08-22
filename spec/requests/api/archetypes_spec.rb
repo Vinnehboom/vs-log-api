@@ -19,6 +19,10 @@ RSpec.describe 'archetypes' do
         parameter name: :game_id, in: :path, type: :string
         parameter name: :HTTP_FIREBASE_ID_TOKEN, in: :header, type: :string, required: true,
                   example: 'FIREBASE_ID_TOKEN: eyadadan...'
+        parameter name: :identifier, type: :string, in: :query, required: false,
+                  description: 'Find archetypes whose identifier contains the query string'
+        parameter name: :name, type: :string, in: :query, required: false,
+                  description: 'Find archetypes whose name contains the query string'
 
         response '401', 'unauthorized' do
           let(:HTTP_FIREBASE_ID_TOKEN) { '32113312' }
@@ -43,6 +47,47 @@ RSpec.describe 'archetypes' do
               icons: [
                 {
                   'gardevoir-ex' => 'https://icons.com/gardevoir-ex'
+                }
+              ]
+            },
+            {
+              game_id: 'PTCG',
+              id: 1,
+              identifier: 'charizard-ex',
+              name: 'Charizard ex',
+              priority: 10,
+              generation: 9,
+              cards: [
+                {
+                  name: 'Charizard ex',
+                  count: '3'
+                }
+              ],
+              icons: [
+                {
+                  'charizard-ex' => 'https://icons.com/charizard-ex'
+                }
+              ]
+            }
+          ]
+
+          example 'application/json', :filter_charizard, [
+            {
+              game_id: 'PTCG',
+              id: 1,
+              identifier: 'charizard-ex',
+              name: 'Charizard ex',
+              priority: 10,
+              generation: 9,
+              cards: [
+                {
+                  name: 'Charizard ex',
+                  count: '3'
+                }
+              ],
+              icons: [
+                {
+                  'charizard-ex' => 'https://icons.com/charizard-ex'
                 }
               ]
             }

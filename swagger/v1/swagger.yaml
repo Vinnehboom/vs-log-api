@@ -21,6 +21,18 @@ paths:
         example: 'FIREBASE_ID_TOKEN: eyadadan...'
         schema:
           type: string
+      - name: identifier
+        in: query
+        required: false
+        description: Find archetypes whose identifier contains the query string
+        schema:
+          type: string
+      - name: name
+        in: query
+        required: false
+        description: Find archetypes whose name contains the query string
+        schema:
+          type: string
       responses:
         '401':
           description: unauthorized
@@ -42,6 +54,30 @@ paths:
                       count: '2'
                     icons:
                     - gardevoir-ex: https://icons.com/gardevoir-ex
+                  - game_id: PTCG
+                    id: 1
+                    identifier: charizard-ex
+                    name: Charizard ex
+                    priority: 10
+                    generation: 9
+                    cards:
+                    - name: Charizard ex
+                      count: '3'
+                    icons:
+                    - charizard-ex: https://icons.com/charizard-ex
+                filter_charizard:
+                  value:
+                  - game_id: PTCG
+                    id: 1
+                    identifier: charizard-ex
+                    name: Charizard ex
+                    priority: 10
+                    generation: 9
+                    cards:
+                    - name: Charizard ex
+                      count: '3'
+                    icons:
+                    - charizard-ex: https://icons.com/charizard-ex
   "/{game_id}/archetypes/{id}":
     get:
       summary: Retrieve an archetype
