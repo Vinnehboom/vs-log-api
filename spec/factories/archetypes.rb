@@ -4,7 +4,12 @@ FactoryBot.define do
     name { Faker::Games::Pokemon.name }
     priority { rand(25) }
     generation { rand(10) }
-    cards { Faker::Types.rb_hash }
+    cards do
+      [{
+        name: Faker::Games::Pokemon.name,
+        count: rand(4)
+      }]
+    end
     game
   end
 end

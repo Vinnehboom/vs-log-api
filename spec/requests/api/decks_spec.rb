@@ -31,7 +31,21 @@ RSpec.describe 'decks' do
             id: '1234-abcd',
             user_id: ' 123d-adsd',
             archetype_id: 9,
-            name: 'Psychic Elegance'
+            name: 'Psychic Elegance',
+            archetype: {
+              id: 1,
+              identifier: 'gardevoir-ex-sv',
+              name: 'Gardevoir ex',
+              priority: 10,
+              generation: 9,
+              game_id: 'PTCG',
+              cards: [
+                {
+                  name: 'Gardevoir ex',
+                  count: '2'
+                }
+              ]
+            }
           }]
 
           run_test!
@@ -92,16 +106,39 @@ RSpec.describe 'decks' do
                    id: { type: :string },
                    user_id: { type: :string },
                    name: { type: :string },
-                   archetype_id: { type: :integer }
+                   archetype: { type: :object,
+                                properties: {
+                                  id: { type: :integer },
+                                  identifier: { type: :string },
+                                  name: { type: :string },
+                                  priority: { type: :integer },
+                                  generation: { type: :integer },
+                                  game_id: { type: :string },
+                                  cards: { type: :array }
+                                } }
                  },
-                 required: %w[id name archetype_id user_id]
+                 required: %w[id name archetype user_id game_id]
 
           example 'application/json', :example_key, {
             game_id: 'PTCG',
             id: '1234-abcd',
             user_id: ' 123d-adsd',
             archetype_id: 9,
-            name: 'Psychic Elegance'
+            name: 'Psychic Elegance',
+            archetype: {
+              id: 1,
+              identifier: 'gardevoir-ex-sv',
+              name: 'Gardevoir ex',
+              priority: 10,
+              generation: 9,
+              game_id: 'PTCG',
+              cards: [
+                {
+                  name: 'Gardevoir ex',
+                  count: '2'
+                }
+              ]
+            }
           }
 
           run_test!
