@@ -276,6 +276,16 @@ paths:
                     user_id: " 123d-adsd"
                     archetype_id: 9
                     name: Psychic Elegance
+                    archetype:
+                      id: 1
+                      identifier: gardevoir-ex-sv
+                      name: Gardevoir ex
+                      priority: 10
+                      generation: 9
+                      game_id: PTCG
+                      cards:
+                      - name: Gardevoir ex
+                        count: '2'
     post:
       summary: add a deck
       tags:
@@ -347,6 +357,16 @@ paths:
                     user_id: " 123d-adsd"
                     archetype_id: 9
                     name: Psychic Elegance
+                    archetype:
+                      id: 1
+                      identifier: gardevoir-ex-sv
+                      name: Gardevoir ex
+                      priority: 10
+                      generation: 9
+                      game_id: PTCG
+                      cards:
+                      - name: Gardevoir ex
+                        count: '2'
         '401':
           description: unauthorized
         '404':

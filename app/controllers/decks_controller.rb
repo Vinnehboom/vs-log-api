@@ -40,7 +40,7 @@ class DecksController < ApplicationController
   private
 
   def decks
-    Deck.where(game:, user_id:)
+    Deck.includes(:archetype).where(game:, user_id:)
   end
 
   def deck_params
