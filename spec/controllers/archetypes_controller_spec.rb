@@ -17,6 +17,14 @@ RSpec.describe ArchetypesController do
       expect(assigns(:archetypes)).not_to include(*other_game_archetypes)
     end
 
+    it 'orders the archetypes by generation descending' do
+      new_archetype = create(:archetype, generation: 12, game:)
+      old_archetype = create(:archetype, generation: 1, game:)
+      get :index, params: { game: game.id }, format: :json
+      expect(assigns(:archetypes).first).to eq(new_archetype)
+      expect(assigns(:archetypes).last).to eq(old_archetype)
+    end
+
     describe 'when filtering for identifier' do
       it 'includes all archetypes whose identifier contains the query' do
         archetype1 = create(:archetype, game:, identifier: 'arcanine')

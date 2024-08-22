@@ -16,6 +16,7 @@ RSpec.describe 'archetypes' do
       get "Retrieve all the game's archetypes" do
         tags 'Archetypes'
         consumes 'application/json'
+        description 'Archetypes are shown by generation descending'
         parameter name: :game_id, in: :path, type: :string
         parameter name: :HTTP_FIREBASE_ID_TOKEN, in: :header, type: :string, required: true,
                   example: 'FIREBASE_ID_TOKEN: eyadadan...'
