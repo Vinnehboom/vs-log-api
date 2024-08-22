@@ -48,6 +48,7 @@ group :development, :test do
   gem 'debug', platforms: %i[mri windows]
   gem 'factory_bot_rails'
   gem 'faker', '~> 3.4'
+  gem 'rails-controller-testing'
   gem 'rspec'
   gem 'rspec-html-matchers'
   gem 'rspec-parameterized'
