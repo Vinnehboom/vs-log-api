@@ -17,6 +17,7 @@ RSpec.describe 'decks' do
         tags 'Decks'
         consumes 'application/json'
         parameter name: :game_id, in: :path, type: :string
+        parameter name: :active, in: :query, type: :boolean, required: false, description: 'filter for active lists'
         parameter name: :HTTP_FIREBASE_ID_TOKEN, in: :header, type: :string, required: true,
                   example: 'FIREBASE_ID_TOKEN: eyadadan...'
 
@@ -26,10 +27,33 @@ RSpec.describe 'decks' do
         end
 
         response '200', 'Deck found' do
-          example 'application/json', :example_key, [{
+          example 'application/json', :base, [{
             game_id: 'PTCG',
             id: '1234-abcd',
             user_id: ' 123d-adsd',
+            active: false,
+            archetype_id: 9,
+            name: 'Psychic Elegance',
+            archetype: {
+              id: 1,
+              identifier: 'gardevoir-ex-sv',
+              name: 'Gardevoir ex',
+              priority: 10,
+              generation: 9,
+              game_id: 'PTCG',
+              cards: [
+                {
+                  name: 'Gardevoir ex',
+                  count: '2'
+                }
+              ]
+            }
+          }]
+          example 'application/json', :active, [{
+            game_id: 'PTCG',
+            id: '1234-abcd',
+            user_id: ' 123d-adsd',
+            active: true,
             archetype_id: 9,
             name: 'Psychic Elegance',
             archetype: {
@@ -99,6 +123,8 @@ RSpec.describe 'decks' do
         parameter name: :game_id, in: :path, type: :string
         parameter name: :HTTP_FIREBASE_ID_TOKEN, in: :header, type: :string, required: true,
                   example: 'FIREBASE_ID_TOKEN: eyadadan...'
+        parameter name: :active, in: :query, type: :boolean, required: false, description: 'filter for active lists'
+
         response '200', 'Decks found' do
           schema type: :object,
                  properties: {
