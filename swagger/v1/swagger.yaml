@@ -255,6 +255,12 @@ paths:
         required: true
         schema:
           type: string
+      - name: active
+        in: query
+        required: false
+        description: filter for active lists
+        schema:
+          type: boolean
       - name: HTTP_FIREBASE_ID_TOKEN
         in: header
         required: true
@@ -269,11 +275,30 @@ paths:
           content:
             application/json:
               examples:
-                example_key:
+                base:
                   value:
                   - game_id: PTCG
                     id: 1234-abcd
                     user_id: " 123d-adsd"
+                    active: false
+                    archetype_id: 9
+                    name: Psychic Elegance
+                    archetype:
+                      id: 1
+                      identifier: gardevoir-ex-sv
+                      name: Gardevoir ex
+                      priority: 10
+                      generation: 9
+                      game_id: PTCG
+                      cards:
+                      - name: Gardevoir ex
+                        count: '2'
+                active:
+                  value:
+                  - game_id: PTCG
+                    id: 1234-abcd
+                    user_id: " 123d-adsd"
+                    active: true
                     archetype_id: 9
                     name: Psychic Elegance
                     archetype:
@@ -344,6 +369,12 @@ paths:
         example: 'FIREBASE_ID_TOKEN: eyadadan...'
         schema:
           type: string
+      - name: active
+        in: query
+        required: false
+        description: filter for active lists
+        schema:
+          type: boolean
       responses:
         '200':
           description: Decks found

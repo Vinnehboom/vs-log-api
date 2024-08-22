@@ -40,11 +40,15 @@ class DecksController < ApplicationController
   private
 
   def decks
-    Deck.includes(:archetype).where(game:, user_id:)
+    Deck.includes(:archetype).where(game:, user_id:).where(query_params)
   end
 
   def deck_params
     params.require(:deck).permit(:name, :archetype_id, :active)
+  end
+
+  def query_params
+    params.permit(:active)
   end
 
 end
