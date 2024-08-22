@@ -1,6 +1,6 @@
 class ArchetypeSerializer < ActiveModel::Serializer
 
-  attributes :id, :name, :identifier, :priority, :generation, :game_id, :cards, :icons
+  attributes :id, :name, :identifier, :generation, :game_id, :cards, :icons
 
   def icons
     object.icons.map { |icon| { icon.filename => url(icon:) } }
