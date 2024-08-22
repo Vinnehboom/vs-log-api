@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :decks do
       resources :lists, controller: "decks/lists"
     end
+    resources :archetypes, only: %i[index show]
   end
 
   # Defines the root path route ("/")
