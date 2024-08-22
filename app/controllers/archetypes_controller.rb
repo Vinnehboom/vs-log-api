@@ -15,7 +15,7 @@ class ArchetypesController < ApplicationController
   private
 
   def archetypes
-    Archetype.where(game:)
+    Archetype.order('generation desc').where(game:)
   end
 
   def query_params

@@ -9,6 +9,7 @@ paths:
       summary: Retrieve all the game's archetypes
       tags:
       - Archetypes
+      description: Archetypes are shown by generation descending
       parameters:
       - name: game_id
         in: path
