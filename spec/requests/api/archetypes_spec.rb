@@ -37,7 +37,6 @@ RSpec.describe 'archetypes' do
               id: 1,
               identifier: 'gardevoir-ex-sv',
               name: 'Gardevoir ex',
-              priority: 10,
               generation: 9,
               cards: [
                 {
@@ -56,7 +55,6 @@ RSpec.describe 'archetypes' do
               id: 1,
               identifier: 'charizard-ex',
               name: 'Charizard ex',
-              priority: 10,
               generation: 9,
               cards: [
                 {
@@ -78,7 +76,6 @@ RSpec.describe 'archetypes' do
               id: 1,
               identifier: 'charizard-ex',
               name: 'Charizard ex',
-              priority: 10,
               generation: 9,
               cards: [
                 {
@@ -119,19 +116,17 @@ RSpec.describe 'archetypes' do
                    id: { type: :integer },
                    identifier: { type: :string },
                    name: { type: :string },
-                   priority: { type: :integer },
                    generation: { type: :integer },
                    cards: { type: :array },
                    icons: { type: :array }
                  },
-                 required: %w[id game_id name identifier icons cards priority generation]
+                 required: %w[id game_id name identifier icons cards generation]
 
           example 'application/json', :example_key, {
             game_id: 'PTCG',
             id: 1,
             identifier: 'gardevoir-ex-sv',
             name: 'Gardevoir ex',
-            priority: 10,
             generation: 9,
             cards: [
               {
