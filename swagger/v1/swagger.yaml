@@ -48,7 +48,6 @@ paths:
                     id: 1
                     identifier: gardevoir-ex-sv
                     name: Gardevoir ex
-                    priority: 10
                     generation: 9
                     cards:
                     - name: Gardevoir ex
@@ -59,7 +58,6 @@ paths:
                     id: 1
                     identifier: charizard-ex
                     name: Charizard ex
-                    priority: 10
                     generation: 9
                     cards:
                     - name: Charizard ex
@@ -72,7 +70,6 @@ paths:
                     id: 1
                     identifier: charizard-ex
                     name: Charizard ex
-                    priority: 10
                     generation: 9
                     cards:
                     - name: Charizard ex
@@ -113,7 +110,6 @@ paths:
                     id: 1
                     identifier: gardevoir-ex-sv
                     name: Gardevoir ex
-                    priority: 10
                     generation: 9
                     cards:
                     - name: Gardevoir ex
@@ -362,6 +358,176 @@ paths:
       responses:
         '204':
           description: list deleted
+  "/{game_id}/decks/{deck_id}/matches":
+    get:
+      summary: Retrieve all the deck's matches
+      tags:
+      - Matches
+      parameters:
+      - name: game_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: deck_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: HTTP_FIREBASE_ID_TOKEN
+        in: header
+        required: true
+        example: 'FIREBASE_ID_TOKEN: eyadadan...'
+        schema:
+          type: string
+      - name: expand
+        in: query
+        required: false
+        description: 'Allow for expansion of relationships. e.g.: ?expand=match_games'
+        schema:
+          type: string
+      responses:
+        '401':
+          description: unauthorized
+        '200':
+          description: Matches found
+          content:
+            application/json:
+              examples:
+                base:
+                  value:
+                  - id: ffff5d43-9173-4504-a576-4e50d9d98ba4
+                    list_id: 389b987f-0633-4fb8-b834-619e57f6f097
+                    deck_id: a22512c5-27db-49fc-b1fb-9d029720e3a2
+                    opponent_archetype:
+                      game_id: PTCG
+                      id: 1
+                      identifier: gardevoir-ex-sv
+                      name: Gardevoir ex
+                      generation: 9
+                      cards:
+                      - name: Gardevoir ex
+                        count: '2'
+                    archetype:
+                      game_id: PTCG
+                      id: 1
+                      identifier: gardevoir-ex-sv
+                      name: Gardevoir ex
+                      generation: 9
+                      cards:
+                      - name: Gardevoir ex
+                        count: '2'
+                    bo3: false
+                    coinflip_won:
+                    remarks: ''
+                    result: L
+                    created_at: '2024-08-26T16:49:59+01:00'
+                    updated_at: '2024-08-26T16:49:59+01:00'
+                expanded_matches:
+                  value:
+                  - id: ffff5d43-9173-4504-a576-4e50d9d98ba4
+                    list_id: 389b987f-0633-4fb8-b834-619e57f6f097
+                    deck_id: a22512c5-27db-49fc-b1fb-9d029720e3a2
+                    bo3: false
+                    coinflip_won:
+                    remarks: ''
+                    result: L
+                    opponent_archetype:
+                      game_id: PTCG
+                      id: 1
+                      identifier: gardevoir-ex-sv
+                      name: Gardevoir ex
+                      generation: 9
+                      cards:
+                      - name: Gardevoir ex
+                        count: '2'
+                    archetype:
+                      game_id: PTCG
+                      id: 1
+                      identifier: gardevoir-ex-sv
+                      name: Gardevoir ex
+                      generation: 9
+                      cards:
+                      - name: Gardevoir ex
+                        count: '2'
+                    match_games:
+                    - id: ffff5d43-9173-4504-a576-4e50d9d98ba4
+                      match_id: '0079aea2-c836-4d3f-9ea1-1063e4beae2f'
+                      result: W
+                      started: true
+                    created_at: '2024-08-26T16:49:59+01:00'
+                    updated_at: '2024-08-26T16:49:59+01:00'
+  "/{game_id}/decks/{deck_id}/matches/{id}":
+    get:
+      summary: Retrieve a match
+      tags:
+      - Matches
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: game_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: deck_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: HTTP_FIREBASE_ID_TOKEN
+        in: header
+        required: true
+        example: 'FIREBASE_ID_TOKEN: eyadadan...'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Match found
+          content:
+            application/json:
+              examples:
+                example_key:
+                  value:
+                    id: ffff5d43-9173-4504-a576-4e50d9d98ba4
+                    list_id: 389b987f-0633-4fb8-b834-619e57f6f097
+                    deck_id: a22512c5-27db-49fc-b1fb-9d029720e3a2
+                    bo3: false
+                    coinflip_won:
+                    remarks: ''
+                    result: L
+                    opponent_archetype:
+                      game_id: PTCG
+                      id: 1
+                      identifier: gardevoir-ex-sv
+                      name: Gardevoir ex
+                      generation: 9
+                      cards:
+                      - name: Gardevoir ex
+                        count: '2'
+                    archetype:
+                      game_id: PTCG
+                      id: 1
+                      identifier: gardevoir-ex-sv
+                      name: Gardevoir ex
+                      generation: 9
+                      cards:
+                      - name: Gardevoir ex
+                        count: '2'
+                    match_games:
+                    - id: ffff5d43-9173-4504-a576-4e50d9d98ba4
+                      match_id: '0079aea2-c836-4d3f-9ea1-1063e4beae2f'
+                      result: W
+                      started: true
+                    created_at: '2024-08-26T16:49:59+01:00'
+                    updated_at: '2024-08-26T16:49:59+01:00'
+        '401':
+          description: unauthorized
+        '404':
+          description: Match not found
   "/{game_id}/decks":
     get:
       summary: Retrieve all the user's decks
