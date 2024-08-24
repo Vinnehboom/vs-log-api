@@ -6,14 +6,14 @@ module Decks
 
     def index
       @lists = lists
-      @lists = @lists.includes(expand_params.map(&:to_sym)) if included_relations.present?
 
-      render json: @lists.as_json(include: included_relations)
+      @lists = @lists.includes(expand_params.map(&:to_sym)) if included_relations.present?
+      render json: @lists, expand: included_relations
     end
 
     def show
       @list = lists.includes(:cards).find(params[:id])
-      render json: @list, include: { cards: { only: %i[count name set_id set_number], methods: :image } }
+      render json: @list, expand: [:cards]
     end
 
     def create
@@ -52,13 +52,7 @@ module Decks
     def included_relations
       return {} if expand_params.blank?
 
-      expand_params.map do |relation|
-        if relation == 'cards'
-          { cards: { methods: :image } }
-        else
-          relation.to_sym
-        end
-      end
+      expand_params.map(&:to_sym)
     end
 
     def lists

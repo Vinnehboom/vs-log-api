@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   scope ":game", as: "game_id" do
     resources :decks do
       resources :lists, controller: "decks/lists"
+      resources :matches, only: %i[show index], controller: "decks/matches"
     end
     resources :archetypes, only: %i[index show]
   end
