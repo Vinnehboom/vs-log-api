@@ -333,6 +333,8 @@ paths:
               - name
     delete:
       summary: delete a deck's list
+      tags:
+      - Lists
       parameters:
       - name: game_id
         in: path
@@ -421,8 +423,8 @@ paths:
                     coinflip_won:
                     remarks: ''
                     result: L
-                    created_at: '2024-08-26T16:49:59+01:00'
-                    updated_at: '2024-08-26T16:49:59+01:00'
+                    created_at: '2024-08-27T12:42:50+01:00'
+                    updated_at: '2024-08-27T12:42:50+01:00'
                 expanded_matches:
                   value:
                   - id: ffff5d43-9173-4504-a576-4e50d9d98ba4
@@ -455,8 +457,75 @@ paths:
                       match_id: '0079aea2-c836-4d3f-9ea1-1063e4beae2f'
                       result: W
                       started: true
-                    created_at: '2024-08-26T16:49:59+01:00'
-                    updated_at: '2024-08-26T16:49:59+01:00'
+                    created_at: '2024-08-27T12:42:50+01:00'
+                    updated_at: '2024-08-27T12:42:50+01:00'
+    post:
+      summary: add a match to the deck
+      tags:
+      - Matches
+      parameters:
+      - name: game_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: deck_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: HTTP_FIREBASE_ID_TOKEN
+        in: header
+        required: true
+        example: 'FIREBASE_ID_TOKEN: eyadadan...'
+        schema:
+          type: string
+      responses:
+        '201':
+          description: match created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                deck_id:
+                  type: string
+                result:
+                  type: string
+                bo3:
+                  type: boolean
+                remarks:
+                  type: string
+                coinflip_won:
+                  type: boolean
+                archetype_id:
+                  type: string
+                opponent_archetype_id:
+                  type: string
+                match_games:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      started:
+                        type: boolean
+                      result:
+                        type: string
+                  required:
+                  - result
+                  - started
+              required:
+              - result
+              - bo3
+              - archetype_id
+              - opponent_archetype_id
+              - remarks
+              - match_games
   "/{game_id}/decks/{deck_id}/matches/{id}":
     get:
       summary: Retrieve a match
@@ -522,12 +591,78 @@ paths:
                       match_id: '0079aea2-c836-4d3f-9ea1-1063e4beae2f'
                       result: W
                       started: true
-                    created_at: '2024-08-26T16:49:59+01:00'
-                    updated_at: '2024-08-26T16:49:59+01:00'
+                    created_at: '2024-08-27T12:42:50+01:00'
+                    updated_at: '2024-08-27T12:42:50+01:00'
         '401':
           description: unauthorized
         '404':
           description: Match not found
+    patch:
+      summary: update a deck's match
+      tags:
+      - Matches
+      parameters:
+      - name: game_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: deck_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: HTTP_FIREBASE_ID_TOKEN
+        in: header
+        required: true
+        example: 'FIREBASE_ID_TOKEN: eyadadan...'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: match updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                remarks:
+                  type: string
+    delete:
+      summary: delete a deck's match
+      tags:
+      - Matches
+      parameters:
+      - name: game_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: deck_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: HTTP_FIREBASE_ID_TOKEN
+        in: header
+        required: true
+        example: 'FIREBASE_ID_TOKEN: eyadadan...'
+        schema:
+          type: string
+      responses:
+        '204':
+          description: match deleted
   "/{game_id}/decks":
     get:
       summary: Retrieve all the user's decks
@@ -727,6 +862,8 @@ paths:
               - archetype_id
     delete:
       summary: delete a deck
+      tags:
+      - Decks
       parameters:
       - name: game_id
         in: path

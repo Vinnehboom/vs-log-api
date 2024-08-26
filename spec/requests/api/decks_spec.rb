@@ -211,6 +211,7 @@ RSpec.describe 'decks' do
       end
 
       delete 'delete a deck' do
+        tags 'Decks'
         consumes 'application/json'
         parameter name: :game_id, in: :path, type: :string
         parameter name: :id, in: :path, type: :string

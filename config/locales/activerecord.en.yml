@@ -8,3 +8,7 @@ en:
           attributes:
             cards:
               invalid_card_count: "List does not meet required card count"
+        match:
+          attributes:
+            match_games:
+              limit_exceeded: "Too many games added to the match"

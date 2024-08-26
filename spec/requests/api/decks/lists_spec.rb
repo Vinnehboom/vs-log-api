@@ -213,6 +213,7 @@ Invalid card strings will be ignored automatically.'
       end
 
       delete "delete a deck's list" do
+        tags 'Lists'
         consumes 'application/json'
         parameter name: :game_id, in: :path, type: :string
         parameter name: :deck_id, in: :path, type: :string

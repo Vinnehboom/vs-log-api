@@ -6,7 +6,6 @@ module Decks
 
     def index
       @matches = matches
-      @matches = @matches.includes(included_relations) if included_relations.present?
 
       render json: @matches, expand: included_relations
     end
@@ -16,14 +15,59 @@ module Decks
       render json: @match, expand: [:match_games]
     end
 
+    def create
+      @match = matches.new(create_params)
+      if @match.save
+        render json: @match, status: :created
+      else
+        render json: @match.errors, status: :unprocessable_entity
+      end
+    end
+
+    def update
+      @match = matches.find(params[:id])
+      if @match.update(update_params)
+        render json: @match
+      else
+        render json: @match.errors, status: :unprocessable_entity
+      end
+    end
+
+    def destroy
+      @match = matches.find(params[:id])
+      if @match.destroy
+        head :no_content
+      else
+        render json: @match.errors, status: :unprocessable_entity
+      end
+    end
+
     private
 
     def set_deck
       @deck = decks.find(params[:deck_id])
     end
 
+    def create_params
+      params.require(:match).permit(:result,
+                                    :remarks,
+                                    :bo3,
+                                    :coinflip_won,
+                                    :archetype_id,
+                                    :opponent_archetype_id,
+                                    match_games_attributes:)
+    end
+
+    def update_params
+      params.require(:match).permit(:remarks)
+    end
+
+    def match_games_attributes
+      %i[result started]
+    end
+
     def matches
-      @deck.matches.includes(:archetype, :opponent_archetype)
+      @deck.matches.includes(:archetype, :opponent_archetype, :match_games)
     end
 
     def included_relations
