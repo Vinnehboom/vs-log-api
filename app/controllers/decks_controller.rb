@@ -1,7 +1,7 @@
 class DecksController < ApplicationController
 
   def index
-    @decks = decks
+    @decks = paginate decks
     render json: @decks
   end
 

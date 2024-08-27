@@ -25,6 +25,10 @@ RSpec.describe 'decks/lists' do
         parameter name: :active, in: :query, type: :boolean, required: false, description: 'filter for active lists'
         parameter name: :expand, in: :query, type: :string, required: false,
                   description: 'Allow for expansion of relationships. e.g.: ?expand=cards'
+        parameter name: :per_page, in: :query, type: :string, required: false,
+                  description: 'Indicate the amount of records per page you want to retrieve. defaults to 25'
+        parameter name: :page, in: :query, type: :string, required: false,
+                  description: 'Indicate the page you want to retrieve'
 
         response '401', 'unauthorized' do
           let(:HTTP_FIREBASE_ID_TOKEN) { '32113312' }

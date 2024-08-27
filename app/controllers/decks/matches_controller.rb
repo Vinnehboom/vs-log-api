@@ -5,7 +5,7 @@ module Decks
     before_action :set_deck
 
     def index
-      @matches = matches
+      @matches = paginate matches
       @matches = apply_query_params(collection: @matches) if query_params.present?
 
       render json: @matches, expand: included_relations

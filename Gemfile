@@ -19,7 +19,9 @@ gem 'puma', '>= 5.0'
 # gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
+gem 'api-pagination'
 gem 'firebase_id_token', '~> 3.0.0'
+gem 'kaminari'
 gem 'redis', '>= 4.0.1'
 gem 'rswag'
 gem 'whenever', require: false

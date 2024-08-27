@@ -16,7 +16,8 @@ RSpec.describe 'archetypes' do
       get "Retrieve all the game's archetypes" do
         tags 'Archetypes'
         consumes 'application/json'
-        description 'Archetypes are shown by generation descending'
+        description 'Archetypes are shown by generation descending.
+                      Pagination disabled by default unless a pagination parameter is present'
         parameter name: :game_id, in: :path, type: :string
         parameter name: :HTTP_FIREBASE_ID_TOKEN, in: :header, type: :string, required: true,
                   example: 'FIREBASE_ID_TOKEN: eyadadan...'
@@ -24,6 +25,10 @@ RSpec.describe 'archetypes' do
                   description: 'Find archetypes whose identifier contains the query string'
         parameter name: :name, type: :string, in: :query, required: false,
                   description: 'Find archetypes whose name contains the query string'
+        parameter name: :per_page, in: :query, type: :string, required: false,
+                  description: 'Indicate the amount of records per page you want to retrieve. defaults to 25'
+        parameter name: :page, in: :query, type: :string, required: false,
+                  description: 'Indicate the page you want to retrieve'
 
         response '401', 'unauthorized' do
           let(:HTTP_FIREBASE_ID_TOKEN) { '32113312' }
