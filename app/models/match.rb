@@ -8,14 +8,13 @@ class Match < ApplicationRecord
 
   accepts_nested_attributes_for :match_games
 
-  def self.results
-    %w[W L T ID WW WL LW LL WLW WLL LWW LWL]
-  end
-
-  validates :result, presence: true, inclusion: { in: results }
   validates :match_games, presence: true, on: :api_create
   validates :coinflip_won, inclusion: { in: [true, false] }, if: :bo3
   validate :match_count
+
+  def result
+    match_games.pluck(:result).join
+  end
 
   private
 

@@ -34,7 +34,7 @@ RSpec.describe Match do
   describe 'match games count validation' do
     describe 'when the match is bo3' do
       it 'does not allow more than 3 games added' do
-        match = build(:match)
+        match = build(:match, deck: create(:deck, game: create(:game, id: '123')))
         match.match_games = build_list(:match_game, 4)
         match.bo3 = true
         match.save
@@ -51,6 +51,15 @@ RSpec.describe Match do
         match.save
         expect(match.errors[:match_games]).to eq(['Too many games added to the match'])
       end
+    end
+  end
+
+  describe '#result' do
+    it 'displays the related games total results' do
+      match = build(:match, bo3: true)
+      match.match_games = [build(:match_game, match:, result: 'W'), build(:match_game, match:, result: 'L')]
+      match.save!
+      expect(match.reload.result).to eq('WL')
     end
   end
 end
