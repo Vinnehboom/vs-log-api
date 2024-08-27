@@ -6,6 +6,7 @@ module Decks
 
     def index
       @matches = matches
+      @matches = apply_query_params(collection: @matches) if query_params.present?
 
       render json: @matches, expand: included_relations
     end
@@ -60,6 +61,10 @@ module Decks
 
     def update_params
       params.require(:match).permit(:remarks)
+    end
+
+    def query_params
+      params.permit(:list_id, :opponent_archetype_id)
     end
 
     def match_games_attributes

@@ -25,6 +25,11 @@ RSpec.describe 'decks/matches' do
         parameter name: :expand, in: :query, type: :string, required: false,
                   description: 'Allow for expansion of relationships. e.g.: ?expand=match_games'
 
+        parameter name: :list_id, in: :query, type: :string, required: false,
+                  description: 'Allow for filtering by list. e.g.: ?list_id=id1,id2'
+        parameter name: :opponent_archetype_id, in: :query, type: :string, required: false,
+                  description: 'Allow for filtering by list. e.g.: ?list_id=id1,id2'
+
         response '401', 'unauthorized' do
           let(:HTTP_FIREBASE_ID_TOKEN) { '32113312' }
           run_test!
