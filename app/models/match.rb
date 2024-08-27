@@ -13,7 +13,7 @@ class Match < ApplicationRecord
   end
 
   validates :result, presence: true, inclusion: { in: results }
-  validates :match_games, presence: true
+  validates :match_games, presence: true, on: :api_create
   validates :coinflip_won, inclusion: { in: [true, false] }, if: :bo3
   validate :match_count
 

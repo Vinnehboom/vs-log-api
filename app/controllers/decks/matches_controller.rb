@@ -17,7 +17,7 @@ module Decks
 
     def create
       @match = matches.new(create_params)
-      if @match.save
+      if @match.save(context: :api_create)
         render json: @match, status: :created
       else
         render json: @match.errors, status: :unprocessable_entity
