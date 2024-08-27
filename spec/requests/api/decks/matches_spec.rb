@@ -29,6 +29,10 @@ RSpec.describe 'decks/matches' do
                   description: 'Allow for filtering by list. e.g.: ?list_id=id1,id2'
         parameter name: :opponent_archetype_id, in: :query, type: :string, required: false,
                   description: 'Allow for filtering by list. e.g.: ?list_id=id1,id2'
+        parameter name: :per_page, in: :query, type: :string, required: false,
+                  description: 'Indicate the amount of records per page you want to retrieve. defaults to 25'
+        parameter name: :page, in: :query, type: :string, required: false,
+                  description: 'Indicate the page you want to retrieve'
 
         response '401', 'unauthorized' do
           let(:HTTP_FIREBASE_ID_TOKEN) { '32113312' }

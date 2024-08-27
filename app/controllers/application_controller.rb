@@ -32,4 +32,8 @@ class ApplicationController < ActionController::API
     collection
   end
 
+  def pagination_params
+    params.permit(:page, :per_page)
+  end
+
 end

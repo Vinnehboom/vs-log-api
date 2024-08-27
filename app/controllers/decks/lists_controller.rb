@@ -5,7 +5,7 @@ module Decks
     before_action :set_deck
 
     def index
-      @lists = lists
+      @lists = paginate lists
 
       @lists = @lists.includes(expand_params.map(&:to_sym)) if included_relations.present?
       render json: @lists, expand: included_relations

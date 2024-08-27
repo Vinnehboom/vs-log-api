@@ -9,7 +9,9 @@ paths:
       summary: Retrieve all the game's archetypes
       tags:
       - Archetypes
-      description: Archetypes are shown by generation descending
+      description: |-
+        Archetypes are shown by generation descending.
+                              Pagination disabled by default unless a pagination parameter is present
       parameters:
       - name: game_id
         in: path
@@ -32,6 +34,19 @@ paths:
         in: query
         required: false
         description: Find archetypes whose name contains the query string
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        required: false
+        description: Indicate the amount of records per page you want to retrieve.
+          defaults to 25
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        description: Indicate the page you want to retrieve
         schema:
           type: string
       responses:
@@ -150,6 +165,19 @@ paths:
         in: query
         required: false
         description: 'Allow for expansion of relationships. e.g.: ?expand=cards'
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        required: false
+        description: Indicate the amount of records per page you want to retrieve.
+          defaults to 25
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        description: Indicate the page you want to retrieve
         schema:
           type: string
       responses:
@@ -400,6 +428,19 @@ paths:
         description: 'Allow for filtering by list. e.g.: ?list_id=id1,id2'
         schema:
           type: string
+      - name: per_page
+        in: query
+        required: false
+        description: Indicate the amount of records per page you want to retrieve.
+          defaults to 25
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        description: Indicate the page you want to retrieve
+        schema:
+          type: string
       responses:
         '401':
           description: unauthorized
@@ -435,8 +476,8 @@ paths:
                     coinflip_won:
                     remarks: ''
                     result: L
-                    created_at: '2024-08-27T14:25:07+01:00'
-                    updated_at: '2024-08-27T14:25:07+01:00'
+                    created_at: '2024-08-27T14:52:54+01:00'
+                    updated_at: '2024-08-27T14:52:54+01:00'
                 expanded_matches:
                   value:
                   - id: ffff5d43-9173-4504-a576-4e50d9d98ba4
@@ -469,8 +510,8 @@ paths:
                       match_id: '0079aea2-c836-4d3f-9ea1-1063e4beae2f'
                       result: W
                       started: true
-                    created_at: '2024-08-27T14:25:07+01:00'
-                    updated_at: '2024-08-27T14:25:07+01:00'
+                    created_at: '2024-08-27T14:52:54+01:00'
+                    updated_at: '2024-08-27T14:52:54+01:00'
     post:
       summary: add a match to the deck
       tags:
@@ -603,8 +644,8 @@ paths:
                       match_id: '0079aea2-c836-4d3f-9ea1-1063e4beae2f'
                       result: W
                       started: true
-                    created_at: '2024-08-27T14:25:07+01:00'
-                    updated_at: '2024-08-27T14:25:07+01:00'
+                    created_at: '2024-08-27T14:52:54+01:00'
+                    updated_at: '2024-08-27T14:52:54+01:00'
         '401':
           description: unauthorized
         '404':
@@ -696,6 +737,19 @@ paths:
         in: header
         required: true
         example: 'FIREBASE_ID_TOKEN: eyadadan...'
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        required: false
+        description: Indicate the amount of records per page you want to retrieve.
+          defaults to 25
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        description: Indicate the page you want to retrieve
         schema:
           type: string
       responses:

@@ -2,6 +2,7 @@ class ArchetypesController < ApplicationController
 
   def index
     @archetypes = archetypes
+    @archetypes = paginate archetypes if pagination_params.present?
     @archetypes = apply_query_params(archetypes: @archetypes) if query_params.present?
 
     render json: @archetypes
