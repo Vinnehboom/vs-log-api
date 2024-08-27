@@ -388,6 +388,18 @@ paths:
         description: 'Allow for expansion of relationships. e.g.: ?expand=match_games'
         schema:
           type: string
+      - name: list_id
+        in: query
+        required: false
+        description: 'Allow for filtering by list. e.g.: ?list_id=id1,id2'
+        schema:
+          type: string
+      - name: opponent_archetype_id
+        in: query
+        required: false
+        description: 'Allow for filtering by list. e.g.: ?list_id=id1,id2'
+        schema:
+          type: string
       responses:
         '401':
           description: unauthorized
@@ -423,8 +435,8 @@ paths:
                     coinflip_won:
                     remarks: ''
                     result: L
-                    created_at: '2024-08-27T12:42:50+01:00'
-                    updated_at: '2024-08-27T12:42:50+01:00'
+                    created_at: '2024-08-27T14:25:07+01:00'
+                    updated_at: '2024-08-27T14:25:07+01:00'
                 expanded_matches:
                   value:
                   - id: ffff5d43-9173-4504-a576-4e50d9d98ba4
@@ -457,8 +469,8 @@ paths:
                       match_id: '0079aea2-c836-4d3f-9ea1-1063e4beae2f'
                       result: W
                       started: true
-                    created_at: '2024-08-27T12:42:50+01:00'
-                    updated_at: '2024-08-27T12:42:50+01:00'
+                    created_at: '2024-08-27T14:25:07+01:00'
+                    updated_at: '2024-08-27T14:25:07+01:00'
     post:
       summary: add a match to the deck
       tags:
@@ -591,8 +603,8 @@ paths:
                       match_id: '0079aea2-c836-4d3f-9ea1-1063e4beae2f'
                       result: W
                       started: true
-                    created_at: '2024-08-27T12:42:50+01:00'
-                    updated_at: '2024-08-27T12:42:50+01:00'
+                    created_at: '2024-08-27T14:25:07+01:00'
+                    updated_at: '2024-08-27T14:25:07+01:00'
         '401':
           description: unauthorized
         '404':

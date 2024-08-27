@@ -28,6 +28,42 @@ module Decks
           expect(response.parsed_body.first['match_games']).to be_present
         end
       end
+
+      describe 'when filtering the results' do
+        describe 'when filtering for list' do
+          it 'only returns matches for the given lists' do
+            list1 = create(:list, deck:)
+            list2 = create(:list, deck:)
+            list1_matches = create_list(:match, 2, list: list1, deck:)
+            list2_matches = create_list(:match, 2, list: list2, deck:)
+            other_matches = create_list(:match, 2, deck:)
+            get :index, params: {
+              game: game.id,
+              deck_id: deck.id,
+              list_id: "#{list1.id},#{list2.id}"
+            }, format: :json
+            expect(assigns(:matches)).to include(*list1_matches, *list2_matches)
+            expect(assigns(:matches)).not_to include(*other_matches)
+          end
+        end
+
+        describe 'when filtering for opponent archetype' do
+          it 'only returns matches for the given lists' do
+            archetype = create(:archetype, game:)
+            archetype2 = create(:archetype, game:)
+            archetype1_matches = create_list(:match, 2, opponent_archetype: archetype, deck:)
+            archetype2_matches = create_list(:match, 2, opponent_archetype: archetype2, deck:)
+            other_matches = create_list(:match, 2, deck:)
+            get :index, params: {
+              game: game.id,
+              deck_id: deck.id,
+              opponent_archetype_id: "#{archetype.id},#{archetype2.id}"
+            }, format: :json
+            expect(assigns(:matches)).to include(*archetype1_matches, *archetype2_matches)
+            expect(assigns(:matches)).not_to include(*other_matches)
+          end
+        end
+      end
     end
 
     describe '#show' do

@@ -23,4 +23,13 @@ class ApplicationController < ActionController::API
     user['user_id']
   end
 
+  def apply_query_params(collection:)
+    return collection if query_params.blank?
+
+    query_params.to_h.each do |attribute, value|
+      collection = collection.and(collection.where(attribute => value&.split(',')))
+    end
+    collection
+  end
+
 end

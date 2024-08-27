@@ -19,7 +19,7 @@ class ArchetypesController < ApplicationController
   end
 
   def query_params
-    params.permit(:identifier, :name, :generation)
+    params.permit(:identifier, :name)
   end
 
   def apply_query_params(archetypes:)
