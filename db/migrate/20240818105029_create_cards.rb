@@ -1,4 +1,10 @@
 class CreateCards < ActiveRecord::Migration[7.1]
+
+  class List < ActiveRecord::Base
+    self.table_name = 'lists'
+    has_many :cards
+  end
+
   def change
     create_table :cards do |t|
       t.references :list, type: :uuid, null: false, foreign_key: true

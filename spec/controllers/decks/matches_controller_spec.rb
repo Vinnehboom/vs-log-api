@@ -55,7 +55,6 @@ module Decks
               opponent_archetype_id: create(:archetype, game:).id,
               bo3: false,
               remarks: 'test',
-              result: 'W',
               match_games_attributes: [
                 {
                   started: false,
@@ -87,7 +86,6 @@ module Decks
               archetype_id: create(:archetype, game:).id,
               bo3: false,
               remarks: 'test',
-              result: 'W',
               match_games_attributes: []
             }
           }

@@ -15,7 +15,6 @@ module DataImport
         deck:,
         list:,
         bo3:,
-        result:,
         remarks:,
         coinflip_won:,
         created_at:
@@ -52,10 +51,6 @@ module DataImport
 
     def bo3
       object['bo3']
-    end
-
-    def result
-      object['result']
     end
 
     def remarks
