@@ -1,5 +1,7 @@
 class Match < ApplicationRecord
 
+  default_scope -> { order(created_at: :desc) }
+
   belongs_to :list, optional: true
   belongs_to :deck, optional: true
   belongs_to :opponent_archetype, class_name: 'Archetype'

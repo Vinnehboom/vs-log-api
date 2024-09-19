@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       resources :matches, controller: "decks/matches"
     end
     resources :archetypes, only: %i[index show]
+    resources :matches, only: %i[index]
   end
 
   # Defines the root path route ("/")
