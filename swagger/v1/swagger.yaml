@@ -476,8 +476,8 @@ paths:
                     coinflip_won:
                     remarks: ''
                     result: L
-                    created_at: '2024-08-27T14:52:54+01:00'
-                    updated_at: '2024-08-27T14:52:54+01:00'
+                    created_at: '2024-09-19T18:52:44+01:00'
+                    updated_at: '2024-09-19T18:52:44+01:00'
                 expanded_matches:
                   value:
                   - id: ffff5d43-9173-4504-a576-4e50d9d98ba4
@@ -510,8 +510,8 @@ paths:
                       match_id: '0079aea2-c836-4d3f-9ea1-1063e4beae2f'
                       result: W
                       started: true
-                    created_at: '2024-08-27T14:52:54+01:00'
-                    updated_at: '2024-08-27T14:52:54+01:00'
+                    created_at: '2024-09-19T18:52:44+01:00'
+                    updated_at: '2024-09-19T18:52:44+01:00'
     post:
       summary: add a match to the deck
       tags:
@@ -644,8 +644,8 @@ paths:
                       match_id: '0079aea2-c836-4d3f-9ea1-1063e4beae2f'
                       result: W
                       started: true
-                    created_at: '2024-08-27T14:52:54+01:00'
-                    updated_at: '2024-08-27T14:52:54+01:00'
+                    created_at: '2024-09-19T18:52:44+01:00'
+                    updated_at: '2024-09-19T18:52:44+01:00'
         '401':
           description: unauthorized
         '404':
@@ -950,6 +950,125 @@ paths:
       responses:
         '204':
           description: deck deleted
+  "/{game_id}/matches":
+    get:
+      summary: Retrieve all the user's matches
+      tags:
+      - Matches
+      parameters:
+      - name: game_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: HTTP_FIREBASE_ID_TOKEN
+        in: header
+        required: true
+        example: 'FIREBASE_ID_TOKEN: eyadadan...'
+        schema:
+          type: string
+      - name: expand
+        in: query
+        required: false
+        description: 'Allow for expansion of relationships. e.g.: ?expand=match_games'
+        schema:
+          type: string
+      - name: archetype_id
+        in: query
+        required: false
+        description: Allow for filtering by archetype
+        schema:
+          type: string
+      - name: opponent_archetype_id
+        in: query
+        required: false
+        description: Allow for filtering by opponent archetype
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        required: false
+        description: Indicate the amount of records per page you want to retrieve.
+          defaults to 25
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        description: Indicate the page you want to retrieve
+        schema:
+          type: string
+      responses:
+        '401':
+          description: unauthorized
+        '200':
+          description: Matches found
+          content:
+            application/json:
+              examples:
+                base:
+                  value:
+                  - id: ffff5d43-9173-4504-a576-4e50d9d98ba4
+                    list_id: 389b987f-0633-4fb8-b834-619e57f6f097
+                    deck_id: a22512c5-27db-49fc-b1fb-9d029720e3a2
+                    opponent_archetype:
+                      game_id: PTCG
+                      id: 1
+                      identifier: gardevoir-ex-sv
+                      name: Gardevoir ex
+                      generation: 9
+                      cards:
+                      - name: Gardevoir ex
+                        count: '2'
+                    archetype:
+                      game_id: PTCG
+                      id: 1
+                      identifier: gardevoir-ex-sv
+                      name: Gardevoir ex
+                      generation: 9
+                      cards:
+                      - name: Gardevoir ex
+                        count: '2'
+                    bo3: false
+                    coinflip_won:
+                    remarks: ''
+                    result: L
+                    created_at: '2024-09-19T18:52:44+01:00'
+                    updated_at: '2024-09-19T18:52:44+01:00'
+                expanded_matches:
+                  value:
+                  - id: ffff5d43-9173-4504-a576-4e50d9d98ba4
+                    list_id: 389b987f-0633-4fb8-b834-619e57f6f097
+                    deck_id: a22512c5-27db-49fc-b1fb-9d029720e3a2
+                    bo3: false
+                    coinflip_won:
+                    remarks: ''
+                    result: L
+                    opponent_archetype:
+                      game_id: PTCG
+                      id: 1
+                      identifier: gardevoir-ex-sv
+                      name: Gardevoir ex
+                      generation: 9
+                      cards:
+                      - name: Gardevoir ex
+                        count: '2'
+                    archetype:
+                      game_id: PTCG
+                      id: 1
+                      identifier: gardevoir-ex-sv
+                      name: Gardevoir ex
+                      generation: 9
+                      cards:
+                      - name: Gardevoir ex
+                        count: '2'
+                    match_games:
+                    - id: ffff5d43-9173-4504-a576-4e50d9d98ba4
+                      match_id: '0079aea2-c836-4d3f-9ea1-1063e4beae2f'
+                      result: W
+                      started: true
+                    created_at: '2024-09-19T18:52:44+01:00'
+                    updated_at: '2024-09-19T18:52:44+01:00'
 servers:
 - url: https://{defaultHost}
   variables:
