@@ -60,11 +60,11 @@ module Decks
     end
 
     def update_params
-      params.require(:match).permit(:remarks)
+      params.require(:match).permit(:remarks, :favorite)
     end
 
     def query_params
-      params.permit(:list_id, :opponent_archetype_id)
+      params.permit(:list_id, :opponent_archetype_id, :favorite)
     end
 
     def match_games_attributes

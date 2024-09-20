@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_27_090410) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_20_105054) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -116,6 +116,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_27_090410) do
     t.string "remarks"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "favorite", default: false
     t.index ["archetype_id"], name: "index_matches_on_archetype_id"
     t.index ["deck_id"], name: "index_matches_on_deck_id"
     t.index ["list_id"], name: "index_matches_on_list_id"

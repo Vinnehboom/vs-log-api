@@ -15,6 +15,7 @@ module DataImport
         deck:,
         list:,
         bo3:,
+        favorite:,
         remarks:,
         coinflip_won:,
         created_at:
@@ -51,6 +52,10 @@ module DataImport
 
     def bo3
       object['bo3']
+    end
+
+    def favorite
+      object['favorite'] || false
     end
 
     def remarks
