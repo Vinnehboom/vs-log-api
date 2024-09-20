@@ -148,7 +148,8 @@ module Decks
         let(:params) do
           {
             match: {
-              remarks: 'new remarks'
+              remarks: 'new remarks',
+              favorite: true
             }
           }
         end
@@ -156,6 +157,7 @@ module Decks
         it 'updates the match' do
           patch :update, params: params.merge({ game: game.id, deck_id: deck.id, id: match.id }), format: :json
           expect(response.parsed_body['remarks']).to eq('new remarks')
+          expect(response.parsed_body['favorite']).to be(true)
         end
       end
 

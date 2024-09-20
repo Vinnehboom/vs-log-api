@@ -24,7 +24,8 @@ RSpec.describe 'decks/matches' do
                   example: 'FIREBASE_ID_TOKEN: eyadadan...'
         parameter name: :expand, in: :query, type: :string, required: false,
                   description: 'Allow for expansion of relationships. e.g.: ?expand=match_games'
-
+        parameter name: :favorite, in: :query, type: :string, required: false,
+                  description: 'Allow for filtering by favorite matches'
         parameter name: :list_id, in: :query, type: :string, required: false,
                   description: 'Allow for filtering by list. e.g.: ?list_id=id1,id2'
         parameter name: :opponent_archetype_id, in: :query, type: :string, required: false,
@@ -49,7 +50,8 @@ RSpec.describe 'decks/matches' do
               id: 1,
               identifier: 'gardevoir-ex-sv',
               name: 'Gardevoir ex',
-              generation: 9,
+              generation: 9, favorite: false,
+
               cards: [
                 {
                   name: 'Gardevoir ex',
@@ -86,6 +88,7 @@ RSpec.describe 'decks/matches' do
             coinflip_won: nil,
             remarks: '',
             result: 'L',
+            favorite: false,
             opponent_archetype: {
               game_id: 'PTCG',
               id: 1,
@@ -142,6 +145,7 @@ RSpec.describe 'decks/matches' do
             result: { type: :string },
             bo3: { type: :boolean },
             remarks: { type: :string },
+            favorite: { type: :boolean },
             coinflip_won: { type: :boolean },
             archetype_id: { type: :string },
             opponent_archetype_id: { type: :string },
@@ -207,6 +211,7 @@ RSpec.describe 'decks/matches' do
                    deck_id: { type: :string },
                    result: { type: :string },
                    bo3: { type: :boolean },
+                   favorite: { type: :boolean },
                    remarks: { type: :string },
                    coinflip_won: { type: :boolean },
                    archetype: { type: :object,
@@ -250,6 +255,7 @@ RSpec.describe 'decks/matches' do
             coinflip_won: nil,
             remarks: '',
             result: 'L',
+            favorite: false,
             opponent_archetype: {
               game_id: 'PTCG',
               id: 1,

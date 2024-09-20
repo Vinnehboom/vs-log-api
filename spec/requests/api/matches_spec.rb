@@ -41,6 +41,7 @@ RSpec.describe 'matches' do
             id: 'ffff5d43-9173-4504-a576-4e50d9d98ba4',
             list_id: '389b987f-0633-4fb8-b834-619e57f6f097',
             deck_id: 'a22512c5-27db-49fc-b1fb-9d029720e3a2',
+            favorite: false,
             opponent_archetype: {
               game_id: 'PTCG',
               id: 1,
@@ -82,6 +83,7 @@ RSpec.describe 'matches' do
             bo3: false,
             coinflip_won: nil,
             remarks: '',
+            favorite: false,
             result: 'L',
             opponent_archetype: {
               game_id: 'PTCG',

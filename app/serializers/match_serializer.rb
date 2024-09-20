@@ -1,6 +1,6 @@
 class MatchSerializer < ActiveModel::Serializer
 
-  attributes :id, :list_id, :deck_id, :bo3
+  attributes :id, :list_id, :deck_id, :bo3, :favorite
   attribute :coinflip_won, if: :bo3
 
   attributes :result, :remarks, :archetype, :opponent_archetype
