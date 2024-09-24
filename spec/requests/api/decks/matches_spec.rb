@@ -146,18 +146,19 @@ RSpec.describe 'decks/matches' do
             bo3: { type: :boolean },
             remarks: { type: :string },
             favorite: { type: :boolean },
+            list_id: { type: :string },
             coinflip_won: { type: :boolean },
             archetype_id: { type: :string },
             opponent_archetype_id: { type: :string },
-            match_games: { type: :array, items:
+            match_games_attributes: { type: :array, items:
               { type: :object,
                 properties: {
                   started: { type: :boolean },
                   result: { type: :string }
                 } },
-                           required: %w[result started] }
+                                      required: %w[result started] }
           },
-          required: %w[result bo3 archetype_id opponent_archetype_id remarks match_games]
+          required: %w[result bo3 archetype_id opponent_archetype_id remarks match_games_attributes]
         }
 
         response '201', 'match created' do
@@ -319,7 +320,8 @@ RSpec.describe 'decks/matches' do
         parameter name: :match, getter: :match_body, in: :body, schema: {
           type: :object,
           properties: {
-            remarks: { type: :string }
+            remarks: { type: :string },
+            favorite: { type: :boolean }
           }
         }
 

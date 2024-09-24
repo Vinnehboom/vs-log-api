@@ -13,4 +13,14 @@ RSpec.describe Archetype do
 
     it { is_expected.to validate_uniqueness_of(:identifier) }
   end
+
+  describe '.other' do
+    subject { described_class.other }
+
+    let!(:other) { create(:archetype, identifier: 'other') }
+    let!(:archetype) { create(:archetype) }
+
+    it { is_expected.to include(other) }
+    it { is_expected.not_to include(archetype) }
+  end
 end

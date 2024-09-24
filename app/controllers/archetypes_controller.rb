@@ -5,6 +5,8 @@ class ArchetypesController < ApplicationController
     @archetypes = paginate archetypes if pagination_params.present?
     @archetypes = apply_query_params(archetypes: @archetypes) if query_params.present?
 
+    @archetypes = archetypes.other if @archetypes.empty?
+
     render json: @archetypes
   end
 
