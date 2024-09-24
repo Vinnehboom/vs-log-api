@@ -45,6 +45,14 @@ RSpec.describe ArchetypesController do
         expect(assigns(:archetypes)).to include(archetype1, archetype2)
         expect(assigns(:archetypes)).not_to include(other_archetype)
       end
+
+      it 'returns the other archetype if no hits are found' do
+        archetype1 = create(:archetype, game:, name: 'Arceus')
+        other = create(:archetype, game:, identifier: 'other')
+        get :index, params: { game: game.id, name: 'ffff' }, format: :json
+        expect(assigns(:archetypes)).to include(other)
+        expect(assigns(:archetypes)).not_to include(archetype1)
+      end
     end
 
     describe 'when filtering for name and identifier' do

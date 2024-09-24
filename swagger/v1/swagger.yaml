@@ -483,8 +483,8 @@ paths:
                     coinflip_won:
                     remarks: ''
                     result: L
-                    created_at: '2024-09-20T16:18:58+01:00'
-                    updated_at: '2024-09-20T16:18:58+01:00'
+                    created_at: '2024-09-24T14:21:42+01:00'
+                    updated_at: '2024-09-24T14:21:42+01:00'
                 expanded_matches:
                   value:
                   - id: ffff5d43-9173-4504-a576-4e50d9d98ba4
@@ -518,8 +518,8 @@ paths:
                       match_id: '0079aea2-c836-4d3f-9ea1-1063e4beae2f'
                       result: W
                       started: true
-                    created_at: '2024-09-20T16:18:58+01:00'
-                    updated_at: '2024-09-20T16:18:58+01:00'
+                    created_at: '2024-09-24T14:21:42+01:00'
+                    updated_at: '2024-09-24T14:21:42+01:00'
     post:
       summary: add a match to the deck
       tags:
@@ -564,13 +564,15 @@ paths:
                   type: string
                 favorite:
                   type: boolean
+                list_id:
+                  type: string
                 coinflip_won:
                   type: boolean
                 archetype_id:
                   type: string
                 opponent_archetype_id:
                   type: string
-                match_games:
+                match_games_attributes:
                   type: array
                   items:
                     type: object
@@ -588,7 +590,7 @@ paths:
               - archetype_id
               - opponent_archetype_id
               - remarks
-              - match_games
+              - match_games_attributes
   "/{game_id}/decks/{deck_id}/matches/{id}":
     get:
       summary: Retrieve a match
@@ -655,8 +657,8 @@ paths:
                       match_id: '0079aea2-c836-4d3f-9ea1-1063e4beae2f'
                       result: W
                       started: true
-                    created_at: '2024-09-20T16:18:58+01:00'
-                    updated_at: '2024-09-20T16:18:58+01:00'
+                    created_at: '2024-09-24T14:21:42+01:00'
+                    updated_at: '2024-09-24T14:21:42+01:00'
         '401':
           description: unauthorized
         '404':
@@ -698,6 +700,8 @@ paths:
               properties:
                 remarks:
                   type: string
+                favorite:
+                  type: boolean
     delete:
       summary: delete a deck's match
       tags:
@@ -1045,8 +1049,8 @@ paths:
                     coinflip_won:
                     remarks: ''
                     result: L
-                    created_at: '2024-09-20T16:18:58+01:00'
-                    updated_at: '2024-09-20T16:18:58+01:00'
+                    created_at: '2024-09-24T14:21:42+01:00'
+                    updated_at: '2024-09-24T14:21:42+01:00'
                 expanded_matches:
                   value:
                   - id: ffff5d43-9173-4504-a576-4e50d9d98ba4
@@ -1080,8 +1084,8 @@ paths:
                       match_id: '0079aea2-c836-4d3f-9ea1-1063e4beae2f'
                       result: W
                       started: true
-                    created_at: '2024-09-20T16:18:58+01:00'
-                    updated_at: '2024-09-20T16:18:58+01:00'
+                    created_at: '2024-09-24T14:21:42+01:00'
+                    updated_at: '2024-09-24T14:21:42+01:00'
 servers:
 - url: https://{defaultHost}
   variables:

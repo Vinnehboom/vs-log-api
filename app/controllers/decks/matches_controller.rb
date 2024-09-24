@@ -51,6 +51,8 @@ module Decks
 
     def create_params
       params.require(:match).permit(:result,
+                                    :id,
+                                    :list_id,
                                     :remarks,
                                     :bo3,
                                     :coinflip_won,

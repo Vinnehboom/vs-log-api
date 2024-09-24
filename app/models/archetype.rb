@@ -1,6 +1,7 @@
 class Archetype < ApplicationRecord
 
   default_scope -> { includes(icons_attachments: :blob) }
+  scope :other, -> { where(identifier: 'other') }
   belongs_to :game
   has_many :decks, dependent: :restrict_with_error
   has_many :matches, dependent: :restrict_with_error
