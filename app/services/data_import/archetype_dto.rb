@@ -32,7 +32,7 @@ module DataImport
     def icon_source(icon)
       name = misc_names[icon.to_sym] || icon
 
-      URI.open("https://raw.githubusercontent.com/martimlobao/pokesprite/master/pokemon/regular/#{name}.png")
+      URI.open("https://raw.githubusercontent.com/bradley-erickson/pokesprite/master/pokemon/regular/#{name}.png")
     end
 
     def misc_names
